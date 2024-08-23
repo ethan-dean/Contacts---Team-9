@@ -1,7 +1,7 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$color = $inData["color"];
+	$contact = $inData["contact"];
 	$userId = $inData["userId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
@@ -12,7 +12,7 @@
 	else
 	{
 		$stmt = $conn->prepare("INSERT into Contacts (UserId,Name) VALUES(?,?)");
-		$stmt->bind_param("ss", $userId, $color);
+		$stmt->bind_param("ss", $userId, $contact);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
