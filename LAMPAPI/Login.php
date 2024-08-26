@@ -22,13 +22,19 @@
 		if( $row = $result->fetch_assoc()  )
 		{
 			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+			$stmt->close();
+
+			$updateQuery = "UPDATE users SET DateLastLoggedIn = NOW() WHERE id = ?";
+			$updateStmt = $conn->prepare($updateQuery);
+			$updateStmt->bind_param("s", $row['ID']);
+			$updateStmt->execute();
+			$updateStmt->close();
 		}
 		else
 		{
 			returnWithError("No Records Found");
+			$stmt->close();
 		}
-
-		$stmt->close();
 		$conn->close();
 	}
 	
