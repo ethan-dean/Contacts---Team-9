@@ -1,9 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
+	<title>COP 4331 Contacts Page</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css?v=1.0">	
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() 
@@ -15,12 +19,45 @@
 </head>
 <body>
 
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+<h1 id="title">COP4331 Contacts Page</h1>
 
-<div id="loggedInDiv">
+<header>
+	<span id="userName"></span><br />
+	<nav class="header_nav">
+		<div class="header_logo">
+			<h4>Contacts</h4>
+		</div>
+		<ul class="header_menu">
+			<li>
+				<a href="#home">Home</a>
+			</li>
+			<li>
+				<a href="#about">About Us</a>
+			</li>
+			<li>
+				<a href="#logout"  onclick="doLogout();">Log Out</a>
+			</li>
+			<li class="header_search">
+				<form action="" class="search-form">
+					<input type="search" placeholder="Search Contacts..." onkeyup="searchContact();" class="search-input">
+					<a href="#" class="search-btn" type="button" onclick="searchContact();">
+						<img src="images/search.svg" class="search-icon" alt="search icon">
+					</a>
+				</form>
+			</li>
+			<li class="add-contact">
+				<img src="images/contact-add.png" alt="add contact" class="add-contact-icon" onclick="showAddContact();">
+			</li>
+		</ul>
+	</nav>
+</header>
+
+
+<!--<div id="loggedInDiv">
 	<span id="userName"></span><br />
 	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
 </div>
+<!-->
 
 <div id="accessUIDiv">
 	<br />
