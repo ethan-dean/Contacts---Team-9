@@ -24,7 +24,7 @@
 			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 			$stmt->close();
 
-			$updateQuery = "UPDATE users SET DateLastLoggedIn = NOW() WHERE id = ?";
+			$updateQuery = "UPDATE Users SET DateLastLoggedIn = NOW() WHERE ID = ?";
 			$updateStmt = $conn->prepare($updateQuery);
 			$updateStmt->bind_param("s", $row['ID']);
 			$updateStmt->execute();
