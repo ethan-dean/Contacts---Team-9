@@ -1,11 +1,7 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$userId = $inData["userId"];
-	$firstName = $inData["firstName"];
-	$lastName = $inData["lastName"];
-	$phoneNumber = $inData["phoneNum"];
-	$emailAddress = $inData["emailAddress"];
+	$ID = $inData["ID"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -14,8 +10,8 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE UserID=? AND FirstName=? AND LastName=? AND Phone=? AND Email=?");
-		$stmt->bind_param("sssss", $userId, $firstName, $lastName, $phoneNumber, $emailAddress);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
+		$stmt->bind_param("s", $ID);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
