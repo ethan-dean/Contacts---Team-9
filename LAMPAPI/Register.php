@@ -18,9 +18,14 @@
 		$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?,?,?,?)");
 		$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
 		$stmt->execute();
+
+		//get most recent id 
+		$id = $conn->insert_id;
+
 		$stmt->close();
 		$conn->close();
-    returnWithError("");
+
+    	returnWithInfo($id);
 	}
 	
 	function getRequestInfo()
@@ -32,6 +37,12 @@
 	{
 		header('Content-type: application/json');
 		echo $obj;
+	}
+
+	function returnWithInfo($id)
+	{
+		$retValue = '{"id":' . $id . ',"error":""}';
+		sendResultInfoAsJson( $retValue );
 	}
 	
 	function returnWithError( $err )
