@@ -26,7 +26,12 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["ID"] . ' ' . $row["FirstName"] . ' ' . $row["LastName"] . ' - ' . $row["Phone"] . ' - ' . $row["Email"] .  '"';
+			$searchResults .= '"' . $row["ID"] . '": {';
+			$searchResults .= '"FirstName": "' . $row["FirstName"] . '", ';
+			$searchResults .= '"LastName": "' . $row["LastName"] . '", ';
+			$searchResults .= '"Phone": "' . $row["Phone"] . '", ';
+			$searchResults .= '"Email": "' . $row["Email"] . '"';
+			$searchResults .= '}';
 		}
 		
 		if( $searchCount == 0 )
