@@ -1,5 +1,6 @@
-<?php
 
+<?php
+	//Fully done
 	$inData = getRequestInfo();
 	
 	$searchResults = "";

@@ -1,6 +1,6 @@
 
 <?php
-
+	//Needs to check if user already exists or not before inserting them into the database
 	$inData = getRequestInfo();
 	
 	$firstName = $inData["firstName"];

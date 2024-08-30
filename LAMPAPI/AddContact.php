@@ -1,4 +1,6 @@
+
 <?php
+	//Fully done
 	$inData = getRequestInfo();
 	
 	$userId = $inData["userId"];
