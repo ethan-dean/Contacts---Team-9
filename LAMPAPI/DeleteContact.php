@@ -3,7 +3,7 @@
 	//Fully done, paradise also took in first name last name but this should work the same
 	$inData = getRequestInfo();
 	
-	$ID = $inData["ID"];
+	$ID = $inData["contactId"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
