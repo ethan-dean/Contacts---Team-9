@@ -17,29 +17,28 @@
 	{
 		
 		$stmt = $conn->prepare("SELECT * FROM Users WHERE Login=?");
-		$stmt->bind_param("ssssss", $login);
+		$stmt->bind_param("s", $login);
 		$stmt->execute();
 		$result = $stmt->get_result();
-		$rows = mysqli_num_rows($result);
 		
-		if($rows == 0)
+		if($result->num_rows == 0)
 		{
 			$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?,?,?,?)");
 			$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
 			$stmt->execute();
 
-			//get most recent id 
+			// Get ID of user just inserted
 			$id = $conn->insert_id;
-
-			$stmt->close();
-			$conn->close();
 
 			returnWithInfo($id);
 		} 
 		else
 		{
-			returnWithError("username has alreadly been taken");
-		}
+      returnWithError("Username has alreadly been taken.");
+    }
+
+    $stmt->close();
+    $conn->close();
 	}
 	
 	function getRequestInfo()
@@ -53,7 +52,7 @@
 		echo $obj;
 	}
 
-	function returnWithInfo($id)
+	function returnWithInfo( $id )
 	{
 		$retValue = '{"id":' . $id . ',"error":""}';
 		sendResultInfoAsJson( $retValue );
