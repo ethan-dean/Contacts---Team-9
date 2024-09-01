@@ -1,11 +1,7 @@
 # Database Documentation
-## Queries for operations from API
-#### Add contact to user with UserID
-INSERT INTO Contacts (Name, Phone, Email, UserID) VALUES (?, ?, ?, ?);
-#### Add a User
-INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?);
 
 ## Commands Used to Build Database
+
 #### Create Tables (while in COP4331 database)
 CREATE TABLE `Users`
 (
