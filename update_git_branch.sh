@@ -14,8 +14,8 @@ cd "$REPO_DIR" || { echo "Repository directory not found."; exit 1; }
 /usr/bin/git fetch origin "$BRANCH"
 
 # Check for updates
-LOCAL=$(usr/bin/git rev-parse @)
-REMOTE=$(usr/bin/git rev-parse "@{u}")
+LOCAL=$(/usr/bin/git rev-parse @)
+REMOTE=$(/usr/bin/git rev-parse "@{u}")
 echo "LOCAL:$LOCAL" >> /tmp/debug_log.txt
 echo "REMOTE:$REMOTE" >> /tmp/debug_log.txt
 
