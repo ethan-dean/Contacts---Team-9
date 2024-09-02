@@ -23,7 +23,7 @@ if [ "$LOCAL" = "$REMOTE" ]; then
     echo "No updates found on branch $BRANCH." >> /tmp/debug_log.txt
 else
     echo "Updates found on branch $BRANCH. Pulling changes..." >> /tmp/debug_log.txt
-    usr/bin/git pull origin "$BRANCH"
+    /usr/bin/git pull origin "$BRANCH"
     
     if [ $? -eq 0 ]; then
         echo "Pull successful." >> /tmp/debug_log.txt
