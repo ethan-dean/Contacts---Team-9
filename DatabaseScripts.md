@@ -1,4 +1,5 @@
 # Database Documentation
+
 ## Commands Used to Build Database
 #### Create Tables (while in COP4331 database)
 CREATE TABLE `Users`
