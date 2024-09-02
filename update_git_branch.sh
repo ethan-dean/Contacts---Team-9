@@ -7,22 +7,25 @@ BRANCH="main"                   # Branch to track and pull from
 # Navigate to the repository directory
 cd "$REPO_DIR" || { echo "Repository directory not found."; exit 1; }
 
+# Make sure directory is marked as safe.
+/usr/bin/git config --add safe.directory /var/www/html
+
 # Fetch the latest changes from the remote repository
-git fetch origin "$BRANCH"
+/usr/bin/git fetch origin "$BRANCH"
 
 # Check for updates
-LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse "@{u}")
+LOCAL=$(usr/bin/git rev-parse @)
+REMOTE=$(usr/bin/git rev-parse "@{u}")
 
 if [ "$LOCAL" = "$REMOTE" ]; then
-    echo "No updates found on branch $BRANCH."
+    echo "No updates found on branch $BRANCH." >> /tmp/debug_log.txt
 else
-    echo "Updates found on branch $BRANCH. Pulling changes..."
-    git pull origin "$BRANCH"
+    echo "Updates found on branch $BRANCH. Pulling changes..." >> /tmp/debug_log.txt
+    usr/bin/git pull origin "$BRANCH"
     
     if [ $? -eq 0 ]; then
-        echo "Pull successful."
+        echo "Pull successful." >> /tmp/debug_log.txt
     else
-        echo "Error pulling changes. Check for conflicts or other issues."
+        echo "Error pulling changes. Check for conflicts or other issues." >> /tmp/debug_log.txt
     fi
 fi
