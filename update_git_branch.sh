@@ -17,18 +17,18 @@ cd "$REPO_DIR" || { echo "Repository directory not found."; exit 1; }
 # Check for updates
 LOCAL=$(/usr/bin/git rev-parse @)
 REMOTE=$(/usr/bin/git rev-parse "@{u}")
-echo "LOCAL:$LOCAL" >> DEBUG_FILE
-echo "REMOTE:$REMOTE" >> DEBUG_FILE
+echo "LOCAL:$LOCAL" >> $DEBUG_FILE
+echo "REMOTE:$REMOTE" >> $DEBUG_FILE
 
 if [ "$LOCAL" = "$REMOTE" ]; then
-    echo "No updates found on branch $BRANCH." >> DEBUG_FILE
+    echo "No updates found on branch $BRANCH." >> $DEBUG_FILE
 else
-    echo "Updates found on branch $BRANCH. Pulling changes..." >> DEBUG_FILE
+    echo "Updates found on branch $BRANCH. Pulling changes..." >> $DEBUG_FILE
     /usr/bin/git pull origin "$BRANCH"
     
     if [ $? -eq 0 ]; then
-        echo "Pull successful." >> DEBUG_FILE
+        echo "Pull successful." >> $DEBUG_FILE
     else
-        echo "Error pulling changes. Check for conflicts or other issues." >> DEBUG_FILE
+        echo "Error pulling changes. Check for conflicts or other issues." >> $DEBUG_FILE
     fi
 fi
