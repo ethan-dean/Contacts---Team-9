@@ -32,6 +32,7 @@
 		} 
 		else
 		{
+			header("HTTP/1.1 401 Unauthorized");
 			returnWithError("Username has already been taken. Please try again.");
 		}
 

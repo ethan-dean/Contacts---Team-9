@@ -35,11 +35,13 @@
 			} 
 			else 
 			{
+				header("HTTP/1.1 401 Unauthorized");
 				returnWithError("Invalid username/password. Please check username/password and try again.");
 			}
 		} 
 		else 
 		{
+			header("HTTP/1.1 401 Unauthorized");
 			returnWithError("Invalid username/password. Please check username/password and try again.");
 		}
 
