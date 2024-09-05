@@ -1,40 +1,49 @@
-
 <?php
-	//Fully done
 	$inData = getRequestInfo();
 	
-	$id = 0;
-	$firstName = "";
-	$lastName = "";
-
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
-	if( $conn->connect_error )
+	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+	if ($conn->connect_error) 
 	{
-		returnWithError( $conn->connect_error );
-	}
+		returnWithError($conn->connect_error);
+	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		// Check if username exists and get the password
+		$stmt = $conn->prepare("SELECT ID, firstName, lastName, password FROM Users WHERE Login=?");
+		$stmt->bind_param("s", $inData["login"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if( $row = $result->fetch_assoc()  )
+		if ($row = $result->fetch_assoc()) 
 		{
-			returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
-			$stmt->close();
+			// Check if the provided password matches
+			if ($inData["password"] === $row["password"]) 
+			{
+				// Successful login, return info
+				$statusMessage = "Status: Successful Login";
+				
+				$firstName = !empty($row["firstName"]) ? $row["firstName"] : "Doesn't exist";
+				$lastName = $row["lastName"];  
+				
+				returnWithInfo($firstName, $lastName, $row['ID'], $statusMessage);
 
-			$updateQuery = "UPDATE Users SET DateLastLoggedIn = NOW() WHERE ID = ?";
-			$updateStmt = $conn->prepare($updateQuery);
-			$updateStmt->bind_param("s", $row['ID']);
-			$updateStmt->execute();
-			$updateStmt->close();
-		}
-		else
+				$updateQuery = "UPDATE Users SET DateLastLoggedIn = NOW() WHERE ID = ?";
+				$updateStmt = $conn->prepare($updateQuery);
+				$updateStmt->bind_param("s", $row['ID']);
+				$updateStmt->execute();
+				$updateStmt->close();
+			} 
+			else 
+			{
+				returnWithError("Invalid username/password. Please check username/password and try again.");
+			}
+		} 
+		else 
 		{
-			returnWithError("No Records Found");
-			$stmt->close();
+			returnWithError("Invalid username/password. Please check username/password and try again.");
 		}
+
+		$stmt->close();
 		$conn->close();
 	}
 	
@@ -43,22 +52,28 @@
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function sendResultInfoAsJson( $obj )
+	function sendResultInfoAsJson($obj)
 	{
 		header('Content-type: application/json');
 		echo $obj;
 	}
-	
-	function returnWithError( $err )
+
+	function returnWithError($err)
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
+		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson($retValue);
 	}
 	
-	function returnWithInfo( $firstName, $lastName, $id )
+	function returnWithInfo($firstName, $lastName, $id, $status)
 	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
-		sendResultInfoAsJson( $retValue );
+		$retValue = '{"id":' . $id . ',';
+
+		if ($firstName !== "Doesn't exist") 
+		{
+			$retValue .= '"firstName":"' . $firstName . '", ';
+		}
+
+		$retValue .= '"lastName":"' . $lastName . '", "status":"' . $status . '"}';
+		sendResultInfoAsJson($retValue);
 	}
-	
 ?>
