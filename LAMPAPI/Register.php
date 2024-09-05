@@ -1,10 +1,8 @@
-
 <?php
-	//Added check for users
 	$inData = getRequestInfo();
 	
 	$firstName = $inData["firstName"];
-	$lastName =$inData["lastName"];
+	$lastName = $inData["lastName"];
 	$login = $inData["login"];
 	$password = $inData["password"];
 
@@ -15,30 +13,30 @@
 	}
 	else
 	{
-		
+		// check if username is already taken
 		$stmt = $conn->prepare("SELECT * FROM Users WHERE Login=?");
 		$stmt->bind_param("s", $login);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		
+		// register the new user
 		if($result->num_rows == 0)
 		{
 			$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?,?,?,?)");
 			$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
 			$stmt->execute();
 
-			// Get ID of user just inserted
 			$id = $conn->insert_id;
 
-			returnWithInfo($id);
+			returnWithInfo($id, "Successful Signup");
 		} 
 		else
 		{
-      returnWithError("Username has alreadly been taken.");
-    }
+			returnWithError("Username has already been taken. Please try again.");
+		}
 
-    $stmt->close();
-    $conn->close();
+		$stmt->close();
+		$conn->close();
 	}
 	
 	function getRequestInfo()
@@ -52,16 +50,15 @@
 		echo $obj;
 	}
 
-	function returnWithInfo( $id )
+	function returnWithInfo($id, $status)
 	{
-		$retValue = '{"id":' . $id . ',"error":""}';
+		$retValue = '{"id":' . $id . ', "status":"' . $status . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
 	
-	function returnWithError( $err )
+	function returnWithError($err)
 	{
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
 ?>
