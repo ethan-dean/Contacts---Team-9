@@ -74,7 +74,7 @@ a {
 	height: 40px;
 	font-family: var(--plus-jakarta-sans);
 	font-weight: 800;
-	font-size: 17px;
+	font-size: 18px;
 }
 
 .btn::after {
@@ -103,7 +103,7 @@ a {
 	height: calc(100% + 4px);
 	filter: blur(2px);
 	animation: glowing 20s linear infinite;
-	transition: opacity 1.3s ease-in-out;
+	transition: opacity 0.7s ease-in-out;
 	border-radius: 10px;
 	opacity: 0;
 }
