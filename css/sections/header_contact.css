@@ -107,7 +107,7 @@
     transition: all 1s;
 }
 
-.search-form:hover .search-icon {
+.search-icon:hover {
 	background: #00d5124f;
 	border-radius: 50%;
 }
