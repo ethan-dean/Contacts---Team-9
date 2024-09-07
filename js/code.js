@@ -1,4 +1,4 @@
-const urlBase = 'http://159.223.134.89/LAMPAPI';
+const urlBase = 'http:/contactfold/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -37,7 +37,10 @@ function doLogin()
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
 	
+	console.log("Login: " + login + " Password: " + password);
+	
     var hash = md5( password );
+    console.log("Hash: " + hash);
     if (!validLoginForm(login, password)) {
 		document.getElementById("loginResult").innerHTML = "invalid username or password";
 		return;
