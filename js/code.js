@@ -12,17 +12,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const registerLink = document.getElementById('register-link');
         const loginLink = document.getElementById('login-link');
 
-        registerLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            loginForm.style.display = 'none';
-            registerForm.style.display = 'block';
-        });
-        
-        loginLink.addEventListener('click', (event) => {
-			event.preventDefault();
-			registerForm.style.display = 'none';
-			loginForm.style.display = 'block';
-		});
+        if (registerLink) {
+            registerLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            });
+        }
+
+        if (loginLink) {
+            loginLink.addEventListener('click', (event) => {
+                event.preventDefault();
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            });
+        }
     }
 
     toggleForm();
@@ -92,6 +96,63 @@ function doLogin()
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 
+}
+
+function doRegister()
+{
+	let firstName = document.getElementById("registerFirstName").value;
+	let lastName = document.getElementById("registerLastName").value;
+	let username = document.getElementById("registerUser").value;
+	let password = document.getElementById("registerPassword").value;
+	
+	document.getElementById("registerResult").innerHTML = "";
+	
+	let tmp = {
+		firstName:firstName,
+		lastName:lastName,
+		login:username,
+		password:password
+	}
+	
+	let jsonPayload = JSON.stringify( tmp );
+	let url = urlBase + '/Register.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	
+	try {
+		//trying to check if the user is already registered
+		if(this.readyState != 4)
+		{
+			return;
+		}
+		
+		if(this.status == 200)
+		{
+			let jsonObject = JSON.parse( xhr.responseText );
+			userId = jsonObject.id;
+			if( userId < 1 )
+			{
+				document.getElementById("registerResult").innerHTML = "User/Password combination incorrect";
+				return;
+			}
+			document.getElementById("registerResult").innerHTML = "User has been registered";
+			firstName = jsonObject.firstName;
+			lastName = jsonObject.lastName;
+			saveCookie();
+		}else{
+			document.getElementById("registerResult").innerHTML = "User already exists";
+			return;
+		}
+		
+		xhr.send(jsonPayload);
+	} catch (error) 
+	{
+		document.getElementById("registerResult").innerHTML = error.message;
+	}
+	
+	
 }
 
 function saveCookie()
