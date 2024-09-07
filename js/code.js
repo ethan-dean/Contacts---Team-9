@@ -39,14 +39,19 @@ function doLogin()
 	
 	console.log("Login: " + login + " Password: " + password);
 	
-    //var hash = md5( password );
-    //console.log("Hash: " + hash);
+	var hash = md5(password);
+    console.log("Hashed Password:", hash);
+
+    if (!validLoginForm(login, password)) {
+        document.getElementById("loginResult").innerHTML = "Invalid username or password";
+        return false;
+    }
 	
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {
 		login:login,
-		password:password
+		password:hash
 	};
 	
 	let jsonPayload = JSON.stringify( tmp );
@@ -214,4 +219,14 @@ function searchContact()
 	
 }
 
+function validLoginForm(login, password) {
+    // Example validation: Check if login and password are not empty
+    if (!login || !password) {
+        return false;
+    }
 
+    // Add more validation rules as needed
+    // For example, check if the password meets certain criteria
+
+    return true;
+}
