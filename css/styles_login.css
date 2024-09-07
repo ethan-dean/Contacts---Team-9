@@ -102,7 +102,7 @@ body {
 	background: #fff;
 	border: none;
 	outline: none;
-	border-radius: 40px;
+	border-radius: 12px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 	cursor: pointer;
 	font-size: 16px;
@@ -111,6 +111,12 @@ body {
 }
 
 .form-container .register-link {
+	font-size: 14.5px;
+	text-align: center;
+	margin: 20px 0 15px;
+}
+
+.form-container .login-link {
 	font-size: 14.5px;
 	text-align: center;
 	margin: 20px 0 15px;
