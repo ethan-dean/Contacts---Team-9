@@ -1,4 +1,4 @@
-const urlBase = 'http://contactfold/LAMPAPI';
+const urlBase = 'http://contactfold.com/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
