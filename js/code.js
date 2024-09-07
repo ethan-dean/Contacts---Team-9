@@ -123,6 +123,8 @@ function doRegister()
 	
 	try {
 		//trying to check if the user is already registered
+		xhr.onreadystatechange = function () {
+
 		if(this.readyState != 4)
 		{
 			return;
@@ -142,10 +144,10 @@ function doRegister()
 			lastName = jsonObject.lastName;
 			saveCookie();
 		}else{
-			document.getElementById("registerResult").innerHTML = "User already exists";
-			return;
-		}
-		
+				document.getElementById("registerResult").innerHTML = "User already exists";
+				return;
+			}
+		};
 		xhr.send(jsonPayload);
 	} catch (error) 
 	{
