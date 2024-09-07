@@ -34,23 +34,19 @@ function doLogin()
 	firstName = "";
 	lastName = "";
 	
-	let login = document.getElementById("loginName").value;
+	let login = document.getElementById("loginUser").value;
 	let password = document.getElementById("loginPassword").value;
 	
 	console.log("Login: " + login + " Password: " + password);
 	
-    var hash = md5( password );
-    console.log("Hash: " + hash);
-    if (!validLoginForm(login, password)) {
-		document.getElementById("loginResult").innerHTML = "invalid username or password";
-		return;
-	}
+    //var hash = md5( password );
+    //console.log("Hash: " + hash);
 	
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {
 		login:login,
-		password:hash
+		password:password
 	};
 	
 	let jsonPayload = JSON.stringify( tmp );
@@ -217,3 +213,5 @@ function searchContact()
 	}
 	
 }
+
+
