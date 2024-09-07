@@ -39,19 +39,20 @@ function doLogin()
 	
 	console.log("Login: " + login + " Password: " + password);
 	
-	var hash = md5(password);
+	/*var hash = md5(password);
     console.log("Hashed Password:", hash);
 
     if (!validLoginForm(login, password)) {
         document.getElementById("loginResult").innerHTML = "Invalid username or password";
         return false;
     }
+	*/
 	
 	document.getElementById("loginResult").innerHTML = "";
 
 	let tmp = {
 		login:login,
-		password:hash
+		password:password
 	};
 	
 	let jsonPayload = JSON.stringify( tmp );
