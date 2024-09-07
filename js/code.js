@@ -5,6 +5,29 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    function toggleForm() {
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const registerLink = document.getElementById('register-link');
+        const loginLink = document.getElementById('login-link');
+
+        registerLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+        
+        loginLink.addEventListener('click', (event) => {
+			event.preventDefault();
+			registerForm.style.display = 'none';
+			loginForm.style.display = 'block';
+		});
+    }
+
+    toggleForm();
+});
+
 function doLogin()
 {
 	userId = 0;
@@ -13,12 +36,19 @@ function doLogin()
 	
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
-//	var hash = md5( password );
+    var hash = md5( password );
+    if (!validLoginForm(login, password)) {
+		document.getElementById("loginResult").innerHTML = "invalid username or password";
+		return;
+	}
 	
 	document.getElementById("loginResult").innerHTML = "";
 
-	let tmp = {login:login,password:password};
-//	var tmp = {login:login,password:hash};
+	let tmp = {
+		login:login,
+		password:hash
+	};
+	
 	let jsonPayload = JSON.stringify( tmp );
 	
 	let url = urlBase + '/Login.' + extension;
