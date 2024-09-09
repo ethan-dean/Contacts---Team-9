@@ -264,7 +264,7 @@ function searchContact()
 				
 				for( let i=0; i<jsonObject.results.length; i++ )
 				{
-					const id = doucment.createElement("p");
+					const id = document.createElement("p");
 					id.textContent = jsonObject.results[i].ID;
 					const firstName = document.createElement("p");
 					firstName.textContent = jsonObject.results[i].FirstName;
