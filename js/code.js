@@ -293,6 +293,7 @@ function searchContact()
 
 					// Create the div and fill it with the inputs.
 					const singleContact = document.createElement("div");
+					singleContact.id = "contactItem"+i;
 					singleContact.appendChild(id);
 					singleContact.appendChild(firstName);
 					singleContact.appendChild(lastName);
