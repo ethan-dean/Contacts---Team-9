@@ -243,11 +243,10 @@ function searchContact()
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
 	
-	let contactList = "";
-
+	
 	let tmp = {search:srch,userId:userId};
 	let jsonPayload = JSON.stringify( tmp );
-
+	
 	let url = urlBase + '/SearchContacts.' + extension;
 	
 	let xhr = new XMLHttpRequest();
@@ -260,18 +259,37 @@ function searchContact()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
+				let contactListDiv = document.getElementById("contactList");
 				let jsonObject = JSON.parse( xhr.responseText );
 				
 				for( let i=0; i<jsonObject.results.length; i++ )
 				{
-					contactList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						contactList += "<br />\r\n";
-					}
+					const id = doucment.createElement("p");
+					id.textContent = jsonObject.results[i].ID;
+					const firstName = document.createElement("p");
+					firstName.textContent = jsonObject.results[i].FirstName;
+					const lastName = document.createElement("p");
+					lastName.textContent = jsonObject.results[i].LastName;
+					const phone = document.createElement("p");
+					phone.textContent = jsonObject.results[i].Phone;
+					const email = document.createElement("p");
+					email.textContent = jsonObject.results[i].Email;
+					const editButton = document.createElement("button");
+					editButton.textContent = "Edit Contact";
+					const deleteButton = document.createElement("button");
+					deleteButton.textContent = "Delete Contact";
+
+					const singleContact = document.createElement("div");
+					singleContact.appendChild(id);
+					singleContact.appendChild(firstName);
+					singleContact.appendChild(lastName);
+					singleContact.appendChild(phone);
+					singleContact.appendChild(email);
+					singleContact.appendChild(editButton);
+					singleContact.appendChild(deleteButton);
+
+					contactListDiv.appendChild(singleContact);
 				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
