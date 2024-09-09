@@ -262,23 +262,36 @@ function searchContact()
 				let contactListDiv = document.getElementById("contactList");
 				let jsonObject = JSON.parse( xhr.responseText );
 				
-				for( let i=0; i<jsonObject.results.length; i++ )
+				for (let i = 0; i < jsonObject.results.length; i++)
 				{
+					// Create elements to be added to each contact.
 					const id = document.createElement("p");
-					id.textContent = jsonObject.results[i].ID;
 					const firstName = document.createElement("p");
-					firstName.textContent = jsonObject.results[i].FirstName;
 					const lastName = document.createElement("p");
-					lastName.textContent = jsonObject.results[i].LastName;
 					const phone = document.createElement("p");
-					phone.textContent = jsonObject.results[i].Phone;
 					const email = document.createElement("p");
-					email.textContent = jsonObject.results[i].Email;
 					const editButton = document.createElement("button");
-					editButton.textContent = "Edit Contact";
 					const deleteButton = document.createElement("button");
+
+					// Add classes to each element so they can be styled with CSS.
+					id.classList.add("contactId");
+					firstName.classList.add("contactFirstName");
+					lastName.classList.add("contactLastName");
+					phone.classList.add("contactPhone");
+					email.classList.add("contactEmail");
+					editButton.classList.add("contactEditButton");
+					deleteButton.classList.add("contactDeleteButton");
+
+					// Set elements as the json from searchContacts.
+					id.textContent = jsonObject.results[i].ID;
+					firstName.textContent = jsonObject.results[i].FirstName;
+					lastName.textContent = jsonObject.results[i].LastName;
+					phone.textContent = jsonObject.results[i].Phone;
+					email.textContent = jsonObject.results[i].Email;
+					editButton.textContent = "Edit Contact";
 					deleteButton.textContent = "Delete Contact";
 
+					// Create the div and fill it with the inputs.
 					const singleContact = document.createElement("div");
 					singleContact.appendChild(id);
 					singleContact.appendChild(firstName);
@@ -288,6 +301,7 @@ function searchContact()
 					singleContact.appendChild(editButton);
 					singleContact.appendChild(deleteButton);
 
+					// Append each child created to the iterations contact.
 					contactListDiv.appendChild(singleContact);
 				}
 			}
