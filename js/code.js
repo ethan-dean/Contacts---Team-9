@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             number.classList.toggle('valid', /\d/.test(value));
             number.classList.toggle('invalid', !/\d/.test(value));
 
-            special.classList.toggle('valid', /[@#$%^&+=!_-]/.test(value));
-            special.classList.toggle('invalid', !/[@#$%^&+=!_-]/.test(value));
+            special.classList.toggle('valid', /[@#$%^&+=!_\-]/.test(value));
+            special.classList.toggle('invalid', !/[@#$%^&+=!_\-]/.test(value));
         });
     }
 
@@ -90,6 +90,7 @@ function doLogin()
     console.log("Hashed Password:", hash);*/
 
     if (!validLoginForm(login, password)) {
+        document.getElementById("loginResult").innerHTML = "Invalid username or password";
         return;
     }
 	
@@ -142,18 +143,19 @@ function validLoginForm(login, password)
 {
 	if(login == "")
 	{
-		document.getElementById("loginResult").innerHTML = "Username is blank";
+		//document.getElementById("loginResult").innerHTML = "Username is blank";
 		return false;
 	}
 	
 	if(password == "")
 	{
-		document.getElementById("loginResult").innerHTML = "Password is blank";
+		//document.getElementById("loginResult").innerHTML = "Password is blank";
+		return false;
 	}
 	
 	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}/;
 	if(!passwordRequirements.test(password)) {
-		document.getElementById("loginResult").innerHTML = "Password does not meet requirements";
+		//document.getElementById("loginResult").innerHTML = "Password does not meet requirements";
 		return false;
 	}
 	
@@ -280,7 +282,7 @@ function readCookie()
 	}
 }
 
-	function getCookie(name) {
+function getCookie(name) {
 	let cookieArr = document.cookie.split(";");
 	for(let i = 0; i < cookieArr.length; i++) {
 		let cookiePair = cookieArr[i].split("=");
