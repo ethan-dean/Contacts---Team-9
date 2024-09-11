@@ -347,6 +347,7 @@ function searchContact()
 {
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
+	document.getElementById("contactList").innerHTML = "";
 	
 	
 	let tmp = {search:srch,userId:userId};
