@@ -4,11 +4,14 @@
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	padding: 0 20px;
+	padding: 0 30px;
+	font-family: var(--Poppins);
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .header_logo {
 	display: flex;
+	flex-direction: row;
 	flex: 1;
 	position: relative;
 	padding: 20px;
@@ -16,8 +19,7 @@
 
 .header_logo h4 {
 	text-transform: uppercase;
-	font-family: var(--plus-jakarta-sans);
-	color: #fff;
+	color: #000000;
 	font-size: 20px;
 	padding-left: 45%;
 	font-weight: 400;
@@ -27,31 +29,41 @@
 	padding-right: 15%;
 	display: flex;
 	flex: 1.235;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
+	flex-direction: row;
 	list-style: none;
 	gap: 64px;
-	margin: 0;
+	margin: 15px;
 }
 
 .header_menu li {
 	display: inline-flex;
+	flex-direction: row;
 	align-items: center;
 	cursor: pointer;
 	margin: 0;
+	white-space: nowrap;
 }
 
 .header_menu li a {
-	color: #fff;
-	font-size: 16px;
+	color: #000000;
+	font-size: 20px;
 	padding: 10px 15px;
 	display: inline-block;
-	font-family: var(--plus-jakarta-sans);
 	text-transform: uppercase;
 }
 
 .header_menu li a:hover {
-	color: #00d5124f;
+	background: linear-gradient(45deg, 
+	#b8b1ff, 
+	#9646ad, #1a4fa3, #7e48ab, #b4eaf4);
+	-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+	text-decoration: underline;
+	text-decoration-color: #000;
+	text-decoration-thickness: 2px;
+	color: transparent;
 }
 .header_search {
 	display: flex;
@@ -60,7 +72,7 @@
 
 .search-form {
 	position: relative;
-	transition: all 1s;
+	transition: all 0.5s;
 	width: 40px;
 	height: 40px;
 	background: white;
@@ -68,6 +80,7 @@
 	border-radius: 25px;
 	border: 2px solid white;
 	padding: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
 }
 
 .search-form:hover {
@@ -80,13 +93,13 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 40px;
+	height: 100%;
 	line-height: 20px;
 	outline: 0;
 	border: 0;
 	display: none;
 	font-size: 1em;
-	border-radius: 20px;
+	border-radius: 25%;
 	padding: 0 20px;
 }
 
@@ -98,18 +111,19 @@
 	box-sizing: border-box;
     padding: 8px;
     width: 37px;
-    height: 37px;
+    height: 40px;
     position: absolute;
     top: 0;
     right: 0;
-    border-radius: 25%;
+    z-index: 1;
+    border-radius: 75%;
     text-align: center;
-    transition: all 1s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    background-color: white;
 }
 
 .search-icon:hover {
-	background: #00d5124f;
-	border-radius: 50%;
+	color: #000;
 }
 
 .add-contact {
@@ -121,10 +135,10 @@
 	height: 40px;
 	background: white;
 	border-radius: 50%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 }
 
 .add-contact-icon:hover {
-	background: #00d5124f;
 	border-radius: 50%;
 	cursor: pointer;
 	width: 40px;
