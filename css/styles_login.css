@@ -66,6 +66,28 @@ body {
 	color: black
 }
 
+.password-requirements
+{
+	display: none;
+	color: red;
+	font-size: 14px;
+}
+
+.password-requirements h4 
+{
+	color: black;
+}
+
+.password-requirements .invalid
+{
+	color: red;
+}
+
+.password-requirements .valid
+{
+	color: green;
+}
+
 .input-box img {
 	position: absolute;
 	right: 10px;

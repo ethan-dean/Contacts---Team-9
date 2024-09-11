@@ -28,9 +28,52 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
         }
     }
+    
+    function validatePassword()
+    {
+        const passwordInput = document.getElementById("registerPassword");
+        const requirements = document.getElementsByClassName('password-requirements')[0];
+        const length = document.getElementById('password_length');
+        const uppercase = document.getElementById('password_uppercase');
+        const lowercase = document.getElementById('password_lowercase');
+        const number = document.getElementById('password_number');
+        const special = document.getElementById('password_special');
+        
+        if (!passwordInput || !requirements || !length || !uppercase || !lowercase || !number || !special) {
+            console.error("One or more elements for password validation are missing.");
+            return;
+        }
+
+        passwordInput.addEventListener('focus', () => {
+            requirements.style.display = 'block';
+        });
+
+        passwordInput.addEventListener('blur', () => {
+            requirements.style.display = 'none';
+        });
+
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+            length.classList.toggle('valid', value.length >= 8);
+            length.classList.toggle('invalid', value.length < 8);
+
+            uppercase.classList.toggle('valid', /[A-Z]/.test(value));
+            uppercase.classList.toggle('invalid', !/[A-Z]/.test(value));
+			lowercase.classList.toggle('valid', /[a-z]/.test(value));
+            lowercase.classList.toggle('invalid', !/[a-z]/.test(value));
+
+            number.classList.toggle('valid', /\d/.test(value));
+            number.classList.toggle('invalid', !/\d/.test(value));
+
+            special.classList.toggle('valid', /[@#$%^&+=!_-]/.test(value));
+            special.classList.toggle('invalid', !/[@#$%^&+=!_-]/.test(value));
+        });
+    }
 
     toggleForm();
+    validatePassword();
 });
+
 
 function doLogin()
 {
@@ -44,13 +87,11 @@ function doLogin()
 	console.log("Login: " + login + " Password: " + password);
 	
 	/*var hash = md5(password);
-    console.log("Hashed Password:", hash);
+    console.log("Hashed Password:", hash);*/
 
     if (!validLoginForm(login, password)) {
-        document.getElementById("loginResult").innerHTML = "Invalid username or password";
-        return false;
+        return;
     }
-	*/
 	
 	document.getElementById("loginResult").innerHTML = "";
 
@@ -95,7 +136,28 @@ function doLogin()
 	{
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
+}
 
+function validLoginForm(login, password) 
+{
+	if(login == "")
+	{
+		document.getElementById("loginResult").innerHTML = "Username is blank";
+		return false;
+	}
+	
+	if(password == "")
+	{
+		document.getElementById("loginResult").innerHTML = "Password is blank";
+	}
+	
+	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}/;
+	if(!passwordRequirements.test(password)) {
+		document.getElementById("loginResult").innerHTML = "Password does not meet requirements";
+		return false;
+	}
+	
+	return true;
 }
 
 function doRegister()
@@ -104,6 +166,10 @@ function doRegister()
 	let lastName = document.getElementById("registerLastName").value;
 	let username = document.getElementById("registerUser").value;
 	let password = document.getElementById("registerPassword").value;
+	
+	if(!validRegisterForm(firstName, lastName, username, password)) {
+		return;
+	}
 	
 	document.getElementById("registerResult").innerHTML = "";
 	
@@ -157,6 +223,22 @@ function doRegister()
 	
 }
 
+function validRegisterForm(firstName, lastName, username, password) {
+	if(firstName == "" || lastName == "" || username == "" || password == "") {
+		document.getElementById("registerResult").innerHTML = "Please fill out all fields";
+		return false;
+	}
+	
+	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}/;
+	if(!passwordRequirements.test(password))
+	{
+		document.getElementById("registerResult").innerHTML = "Password does not meet requirements";
+		return false;
+	}
+	
+	return true;
+}
+
 function saveCookie()
 {
 	let minutes = 20;
@@ -195,6 +277,27 @@ function readCookie()
 	else
 	{
 //		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+	}
+}
+
+	function getCookie(name) {
+	let cookieArr = document.cookie.split(";");
+	for(let i = 0; i < cookieArr.length; i++) {
+		let cookiePair = cookieArr[i].split("=");
+		if(name == cookiePair[0].trim()) {
+			return decodeURIComponent(cookiePair[1]);
+		}
+	}
+	return null;
+}
+
+function displayWelcomeMessage() {
+	let firstName = getCookie("firstName");
+	let lastName = getCookie("lastName");
+	
+	
+	if(firstName && lastName) {
+		document.getElementById("welcome-message").innerHTML = "Welcome " + firstName + " " + lastName;
 	}
 }
 
