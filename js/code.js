@@ -346,11 +346,10 @@ function searchContact()
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
 	
-	let contactList = "";
-
+	
 	let tmp = {search:srch,userId:userId};
 	let jsonPayload = JSON.stringify( tmp );
-
+	
 	let url = urlBase + '/SearchContacts.' + extension;
 	
 	let xhr = new XMLHttpRequest();
@@ -363,18 +362,52 @@ function searchContact()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				document.getElementById("contactSearchResult").innerHTML = "Contact(s) has been retrieved";
+				let contactListDiv = document.getElementById("contactList");
 				let jsonObject = JSON.parse( xhr.responseText );
 				
-				for( let i=0; i<jsonObject.results.length; i++ )
+				for (let i = 0; i < jsonObject.results.length; i++)
 				{
-					contactList += jsonObject.results[i];
-					if( i < jsonObject.results.length - 1 )
-					{
-						contactList += "<br />\r\n";
-					}
+					// Create elements to be added to each contact.
+					const id = document.createElement("p");
+					const firstName = document.createElement("p");
+					const lastName = document.createElement("p");
+					const phone = document.createElement("p");
+					const email = document.createElement("p");
+					const editButton = document.createElement("button");
+					const deleteButton = document.createElement("button");
+
+					// Add classes to each element so they can be styled with CSS.
+					id.classList.add("contactId");
+					firstName.classList.add("contactFirstName");
+					lastName.classList.add("contactLastName");
+					phone.classList.add("contactPhone");
+					email.classList.add("contactEmail");
+					editButton.classList.add("contactEditButton");
+					deleteButton.classList.add("contactDeleteButton");
+
+					// Set elements as the json from searchContacts.
+					id.textContent = jsonObject.results[i].ID;
+					firstName.textContent = jsonObject.results[i].FirstName;
+					lastName.textContent = jsonObject.results[i].LastName;
+					phone.textContent = jsonObject.results[i].Phone;
+					email.textContent = jsonObject.results[i].Email;
+					editButton.textContent = "Edit Contact";
+					deleteButton.textContent = "Delete Contact";
+
+					// Create the div and fill it with the inputs.
+					const singleContact = document.createElement("div");
+					singleContact.id = "contactItem"+i;
+					singleContact.appendChild(id);
+					singleContact.appendChild(firstName);
+					singleContact.appendChild(lastName);
+					singleContact.appendChild(phone);
+					singleContact.appendChild(email);
+					singleContact.appendChild(editButton);
+					singleContact.appendChild(deleteButton);
+
+					// Append each child created to the iterations contact.
+					contactListDiv.appendChild(singleContact);
 				}
-				
-				document.getElementsByTagName("p")[0].innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
