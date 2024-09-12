@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     
     function showAddContactForm() {
-        const addContactButton = document.getElementsByClassName('add-contact-icon');
+        const addContactButton = document.getElementByClassName('add-contact-icon');
         const addContactForm = document.getElementById('addContactForm');
         
         if(addContactButton && addContactForm) {
@@ -291,7 +291,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementByClassName("welcome-message").innerHTML = "Welcome" + firstName + " " + lastName;
+		document.getElementById("welcome-message").innerHTML = "Welcome, " + firstName + " " + lastName;
 	}
 }
 
