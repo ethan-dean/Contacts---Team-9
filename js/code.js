@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     
     function showAddContactForm() {
-        const addContactButton = document.getElementByClassName('add-contact-icon');
+        const addContactButton = document.getElementsByClassName('add-contact-icon')[0];
         const addContactForm = document.getElementById('addContactForm');
         
         if(addContactButton && addContactForm) {
