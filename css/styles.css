@@ -86,3 +86,95 @@ a {
 .contacts-table tbody tr {
     border: 5px solid #000000;
 }
+
+/* Styling for the form container */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Button styling */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Button hover effect */
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Search bar styling */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Add hover effect to search button */
+.search-btn {
+    background-color: #007bff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling */
+.contacts-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.contacts-table th, .contacts-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.contacts-table th {
+    background-color: #f2f2f2;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.contacts-table td {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .form-container, .contacts-table table {
+        width: 100%;
+    }
+}
