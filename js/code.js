@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const registerLink = document.getElementById('register-link');
         const loginLink = document.getElementById('login-link');
 
-        if (registerLink) {
+        if (registerLink && loginForm && registerForm) {
             registerLink.addEventListener('click', (event) => {
                 event.preventDefault();
                 loginForm.style.display = 'none';
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
         }
 
-        if (loginLink) {
+        if (loginLink && loginForm && registerForm) {
             loginLink.addEventListener('click', (event) => {
                 event.preventDefault();
                 registerForm.style.display = 'none';
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const special = document.getElementById('password_special');
         
         if (!passwordInput || !requirements || !length || !uppercase || !lowercase || !number || !special) {
-            console.error("One or more elements for password validation are missing.");
+            //console.error("One or more elements for password validation are missing.");
             return;
         }
 
@@ -69,9 +69,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
             special.classList.toggle('invalid', !/[@#$%^&+=!_\-]/.test(value));
         });
     }
+    
+    function showAddContactForm() {
+        const addContactButton = document.getElementsByClassName('add-contact-icon');
+        const addContactForm = document.getElementById('addContactForm');
+        
+        if(addContactButton && addContactForm) {
+            addContactButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                if(addContactForm.style.display === 'none') {
+					addContactForm.style.display = 'block';
+				} else {
+					addContactForm.style.display = 'none';
+				}
+            });
+        }
+	}
 
     toggleForm();
     validatePassword();
+    showAddContactForm();
 });
 
 
@@ -274,7 +291,7 @@ function readCookie()
 	}
 	else
 	{
-//		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
+		document.getElementByClassName("welcome-message").innerHTML = "Welcome" + firstName + " " + lastName;
 	}
 }
 

@@ -12,6 +12,7 @@
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', function() 
 	{
+		
 		readCookie();
 	}, false);
 	</script>
@@ -53,7 +54,7 @@
 </header>
 
 
-<div class="form-container">	
+<div class="form-container" id="addContactForm" style="display: none;">	
 	<form action=" ">
 		<div class="input-box">
 			<input placeholder="First Name" id="AddContactFirstName"type="text">
@@ -73,12 +74,29 @@
 	</form>
 </div>
 
+<div class="contacts-table">
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="contacts">
+        </tbody>
+    </table>
+</div>
+
 <!--<div id="loggedInDiv">
 	<span id="userName"></span><br />
 	<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
 </div>
 <!-->
 
+<!--
 <div id="accessUIDiv">
 	<br />
 
@@ -92,6 +110,6 @@
 	<button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
 	<span id="contactAddResult"></span>
 </div>
-
+-->
 </body>
 </html>
