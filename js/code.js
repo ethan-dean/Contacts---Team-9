@@ -227,7 +227,7 @@ function validRegisterForm(firstName, lastName, username, password) {
 		return false;
 	}
 	
-	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}/;
+	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!_\-]).{8,}/;
 	if(!passwordRequirements.test(password))
 	{
 		document.getElementById("registerResult").innerHTML = "Password does not meet requirements";
