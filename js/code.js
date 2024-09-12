@@ -149,7 +149,7 @@ function validLoginForm(login, password)
 		return false;
 	}
 	
-	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}/;
+	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!_\-]).{8,}/;
 	if(!passwordRequirements.test(password)) {
 		document.getElementById("loginResult").innerHTML = "Password does not meet requirements";
 		return false;
