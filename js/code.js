@@ -343,6 +343,7 @@ function searchContact()
 {
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
+	document.getElementById("contactList").innerHTML = "";
 	
 	
 	let tmp = {search:srch,userId:userId};
@@ -374,15 +375,6 @@ function searchContact()
 					const editButton = document.createElement("button");
 					const deleteButton = document.createElement("button");
 
-					// Add classes to each element so they can be styled with CSS.
-					id.classList.add("contactId");
-					firstName.classList.add("contactFirstName");
-					lastName.classList.add("contactLastName");
-					phone.classList.add("contactPhone");
-					email.classList.add("contactEmail");
-					editButton.classList.add("contactEditButton");
-					deleteButton.classList.add("contactDeleteButton");
-
 					// Set elements as the json from searchContacts.
 					id.textContent = jsonObject.results[i].ID;
 					firstName.textContent = jsonObject.results[i].FirstName;
@@ -391,7 +383,7 @@ function searchContact()
 					email.textContent = jsonObject.results[i].Email;
 					editButton.textContent = "Edit Contact";
 					deleteButton.textContent = "Delete Contact";
-
+					
 					// Create the div and fill it with the inputs.
 					const singleContact = document.createElement("div");
 					singleContact.id = "contactItem"+i;
@@ -402,9 +394,19 @@ function searchContact()
 					singleContact.appendChild(email);
 					singleContact.appendChild(editButton);
 					singleContact.appendChild(deleteButton);
-
+					
 					// Append each child created to the iterations contact.
 					contactListDiv.appendChild(singleContact);
+					
+					// Add classes to each element so they can be styled with CSS.
+					id.classList.add("contactId");
+					firstName.classList.add("contactFirstName");
+					lastName.classList.add("contactLastName");
+					phone.classList.add("contactPhone");
+					email.classList.add("contactEmail");
+					editButton.classList.add("contactEditButton");
+					deleteButton.classList.add("contactDeleteButton");
+					singleContact.classList.add("contactBox");
 				}
 			}
 		};
