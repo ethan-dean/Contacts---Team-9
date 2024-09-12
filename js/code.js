@@ -291,7 +291,7 @@ function readCookie()
 	}
 	else
 	{
-		document.getElementById("welcome-message").innerHTML = "Welcome, " + firstName + " " + lastName;
+		document.getElementById("welcome-message").innerHTML = "Welcome, " + firstName + " " + lastName + "!";
 	}
 }
 
