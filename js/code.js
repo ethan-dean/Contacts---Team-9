@@ -90,7 +90,7 @@ function doLogin()
     console.log("Hashed Password:", hash);*/
 
     if (!validLoginForm(login, password)) {
-        document.getElementById("loginResult").innerHTML = "Invalid username or password";
+        //document.getElementById("loginResult").innerHTML = "Invalid username or password";
         return;
     }
 	
@@ -129,6 +129,9 @@ function doLogin()
 				saveCookie();
 	
 				window.location.href = "contact.html";
+			}else if(this.status == 401)
+			{
+				document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 			}
 		};
 		xhr.send(jsonPayload);
@@ -141,21 +144,14 @@ function doLogin()
 
 function validLoginForm(login, password) 
 {
-	if(login == "")
-	{
-		//document.getElementById("loginResult").innerHTML = "Username is blank";
-		return false;
-	}
-	
-	if(password == "")
-	{
-		//document.getElementById("loginResult").innerHTML = "Password is blank";
+	if(login == "" || password == "") {
+		document.getElementById("loginResult").innerHTML = "Please fill out all fields";
 		return false;
 	}
 	
 	const passwordRequirements = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}/;
 	if(!passwordRequirements.test(password)) {
-		//document.getElementById("loginResult").innerHTML = "Password does not meet requirements";
+		document.getElementById("loginResult").innerHTML = "Password does not meet requirements";
 		return false;
 	}
 	
@@ -419,16 +415,4 @@ function searchContact()
 		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}
 	
-}
-
-function validLoginForm(login, password) {
-    // Example validation: Check if login and password are not empty
-    if (!login || !password) {
-        return false;
-    }
-
-    // Add more validation rules as needed
-    // For example, check if the password meets certain criteria
-
-    return true;
 }
