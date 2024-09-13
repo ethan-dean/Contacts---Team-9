@@ -10,7 +10,7 @@ $emailAddress = $inData["emailAddress"];
 $dateCreated = date("Y-m-d H:i:s"); // Current date and time
 $dateLastLoggedIn = date("Y-m-d H:i:s"); // Current date and time
 
-$conn = new mysqli("localhost", "TheDatabaseUser", "TheDatabasePassword", "TheDatabaseName");
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
