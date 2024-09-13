@@ -363,7 +363,7 @@ function addContact()
 				document.getElementById("addContactForm").reset();
 				addContactToTable(tmp);
 				loadContacts();
-				displayContacts();
+				//displayContacts();
 			}
 		};
 		xhr.send(jsonPayload);
