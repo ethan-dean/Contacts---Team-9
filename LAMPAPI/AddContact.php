@@ -1,9 +1,14 @@
 <?php
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $inData = getRequestInfo();
 
 $firstName = $inData["firstName"];
 $lastName = $inData["lastName"];
-$phoneNumber = $inData["phoneNumber"];
+$phoneNumber = $inData["phoneNum"];
 $emailAddress = $inData["emailAddress"];
 $userId = $inData["userId"];
 $dateCreated = date("Y-m-d H:i:s"); // Current date and time
@@ -16,11 +21,18 @@ if ($conn->connect_error)
 else
 {
     $stmt = $conn->prepare("INSERT INTO Contacts (UserId, FirstName, LastName, Phone, Email, DateCreated) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("isssss", $userId, $firstName, $lastName, $phoneNumber, $emailAddress, $dateCreated);
-    $stmt->execute();
-    $stmt->close();
+    if (!$stmt) {
+        returnWithError($conn->error);
+    } else {
+        $stmt->bind_param("isssss", $userId, $firstName, $lastName, $phoneNumber, $emailAddress, $dateCreated);
+        if (!$stmt->execute()) {
+            returnWithError($stmt->error);
+        } else {
+            returnWithError("");
+        }
+        $stmt->close();
+    }
     $conn->close();
-    returnWithError("");
 }
 
 function getRequestInfo()
