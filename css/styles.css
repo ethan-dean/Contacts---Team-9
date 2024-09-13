@@ -180,11 +180,11 @@ a {
     }
 }
 
-
+/*
 .btn {
 	border: none;
 	outline: none;
-	color: white;
+	color: rgb(144, 16, 16);
 	cursor: pointer;
 	position: relative;
 	z-index: 0;
@@ -195,7 +195,7 @@ a {
 	font-weight: 800;
 	font-size: 18px;
 }
-
+*/
 .btn::after {
 	content: "";
 	z-index: -1;
