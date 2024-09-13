@@ -20,7 +20,7 @@ if ($conn->connect_error)
 } 
 else
 {
-    $stmt = $conn->prepare("INSERT INTO Contacts (firstName, lastName, phone, email, userId) VALUES (?,?,?,?,?)");
+    $stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserId) VALUES (?,?,?,?,?)");
     if (!$stmt) {
         returnWithError($conn->error);
     } else {
