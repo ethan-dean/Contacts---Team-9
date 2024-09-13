@@ -11,7 +11,7 @@ $lastName = $inData["lastName"];
 $phoneNumber = $inData["phoneNumber"];
 $emailAddress = $inData["emailAddress"];
 $userId = $inData["userId"];
-$dateCreated = date("Y-m-d H:i:s"); // Current date and time
+//$dateCreated = date("Y-m-d H:i:s"); // Current date and time
 
 $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 if ($conn->connect_error) 
@@ -20,11 +20,11 @@ if ($conn->connect_error)
 } 
 else
 {
-    $stmt = $conn->prepare("INSERT INTO Contacts (firstName, lastName, phone, email, userId, dateCreated) VALUES (?,?,?,?,?,?)");
+    $stmt = $conn->prepare("INSERT INTO Contacts (firstName, lastName, phone, email, userId) VALUES (?,?,?,?,?)");
     if (!$stmt) {
         returnWithError($conn->error);
     } else {
-        $stmt->bind_param("ssssss", $firstName, $lastName, $phoneNumber, $emailAddress, $userId, $dateCreated);
+        $stmt->bind_param("sssss", $firstName, $lastName, $phoneNumber, $emailAddress, $userId);
         if (!$stmt->execute()) {
             returnWithError($stmt->error);
         } else {

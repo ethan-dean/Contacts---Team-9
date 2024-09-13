@@ -329,7 +329,7 @@ function addContact()
 {
 	let firstName = document.getElementById("AddContactFirstName").value;
 	let lastName = document.getElementById("AddContactsLastName").value;
-	let phoneNum = document.getElementById("AddContactsPhoneNumber").value;
+	let phonenumber = document.getElementById("AddContactsPhoneNumber").value;
 	let emailAddress = document.getElementById("AddContactsEmail").value; 
 	
 	if(!validAddContact(firstName, lastName, phoneNum, emailAddress)) {
@@ -341,8 +341,8 @@ function addContact()
 	let tmp = {
 		firstName: firstName, 
 		lastName: lastName, 
-		phoneNumber: phoneNum,
-		emailaddress: emailAddress,
+		phoneNumber: phonenumber,
+		emailAddress: emailAddress,
 		userId: userId
 	};
 	
