@@ -1,4 +1,9 @@
 <?php
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $inData = getRequestInfo();
 
 $firstName = $inData["firstName"];
@@ -15,12 +20,19 @@ if ($conn->connect_error)
 } 
 else
 {
-    $stmt = $conn->prepare("INSERT INTO Contacts (UserId, FirstName, LastName, Phone, Email, DateCreated) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("isssss", $userId, $firstName, $lastName, $phoneNumber, $emailAddress, $dateCreated);
-    $stmt->execute();
-    $stmt->close();
+    $stmt = $conn->prepare("INSERT INTO Contacts (firstName, lastName, phone, email, userId, dateCreated) VALUES (?,?,?,?,?,?)");
+    if (!$stmt) {
+        returnWithError($conn->error);
+    } else {
+        $stmt->bind_param("ssssss", $firstName, $lastName, $phoneNumber, $emailAddress, $userId, $dateCreated);
+        if (!$stmt->execute()) {
+            returnWithError($stmt->error);
+        } else {
+            returnWithError("");
+        }
+        $stmt->close();
+    }
     $conn->close();
-    returnWithError("");
 }
 
 function getRequestInfo()
