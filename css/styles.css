@@ -180,7 +180,7 @@ a {
     }
 }
 
-
+/*
 .btn {
 	border: none;
 	outline: none;
@@ -195,7 +195,7 @@ a {
 	font-weight: 800;
 	font-size: 18px;
 }
-
+*/
 .btn::after {
 	content: "";
 	z-index: -1;
