@@ -197,66 +197,66 @@ a {
 }
 */
 .btn {
-    border: none;
-    outline: none;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 12px;
-    width: 270px;
-    height: 40px;
-    font-family: var(--plus-jakarta-sans);
-    font-weight: 800;
-    font-size: 18px;
+	border: none;
+	outline: none;
+	color: white;
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
+	border-radius: 12px;
+	width: 270px;
+	height: 40px;
+	font-family: var(--plus-jakarta-sans);
+	font-weight: 800;
+	font-size: 18px;
 }
 
 .btn::after {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
+	content: "";
+	z-index: -1;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+	left: 0;
+	top: 0;
+	border-radius: 10px;
 }
 
 .btn::before {
-    content: "";
-    background: linear-gradient(45deg, 
-    #b8b1ff, 
-    #9646ad, #1a4fa3, #7e48ab, #b4eaf4);
-    z-index: -1;
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-size: 600%;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    filter: blur(2px);
-    animation: glowing 20s linear infinite;
-    transition: opacity 0.7s ease-in-out;
-    border-radius: 10px;
-    opacity: 1; 
+	content: "";
+	background: linear-gradient(45deg, 
+	#b8b1ff, 
+	#9646ad, #1a4fa3, #7e48ab, #b4eaf4);
+	z-index: -1;
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	background-size: 600%;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	filter: blur(2px);
+	animation: glowing 20s linear infinite;
+	transition: opacity 0.7s ease-in-out;
+	border-radius: 10px;
+	opacity: 0;
 }
 
 @keyframes glowing {
-    0% {background-position: 0 0;}
-    50% {background-position: 400% 0;}
-    100% {background-position: 0 0;}
+	0% {background-position: 0 0;}
+	50% {background-position: 400% 0;}
+	100% {background-position: 0 0;}
 }
 
 .btn:hover::before {
-    opacity: 1; 
+	opacity: 1;
 }
 
 .btn:hover::after {
-    background: transparent;
+	background: transparent;
 }
 
 .btn:hover {
-    color: #000;
-    font-weight: 800;    
+	color: #000;
+	font-weight: 800;	
 }
