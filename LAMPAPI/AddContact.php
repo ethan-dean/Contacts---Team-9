@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
     $stmt = $conn->prepare("INSERT INTO Contacts (UserId, FirstName, LastName, Phone, Email, DateCreated, DateLastLoggedIn) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param("issssss", $userId, $firstName, $lastName, $phoneNumber, $emailAddress, $dateCreated, $dateLastLoggedIn);
+    $stmt->bind_param("issssss", $userId, $dateCreated, $dateLastLoggedIn, $firstName, $lastName, $phoneNumber, $emailAddress);
 
     if ($stmt->execute() === TRUE) {
         returnWithInfo("Contact added successfully");
