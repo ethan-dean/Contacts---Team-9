@@ -139,7 +139,7 @@ a {
 
 /* Add hover effect to search button */
 .search-btn {
-    background-color: #007bff;
+    background-color: transparent;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
