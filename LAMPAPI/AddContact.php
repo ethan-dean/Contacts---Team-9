@@ -1,45 +1,54 @@
-
 <?php
-	//Fully done
-	$inData = getRequestInfo();
-	
-	$userId = $inData["userId"];
-	$firstName = $inData["firstName"];
-	$lastName = $inData["lastName"];
-	$phoneNumber = $inData["phoneNum"];
-	$emailAddress = $inData["emailAddress"];
-	$dateCreated = $inData["Y-m-d H:i:s"];
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	if ($conn->connect_error) 
-	{
-		returnWithError( $conn->connect_error );
-	} 
-	else
-	{
-		$stmt = $conn->prepare("INSERT INTO Contacts (FirstName, LastName, Phone, Email, UserId, DateCreated) VALUES (?,?,?,?,?,?)");
-		$stmt->bind_param("ssssis", $firstName, $lastName, $phoneNumber, $emailAddress, $userId, $dateCreated);
-		$stmt->execute();
-		$stmt->close();
-		$conn->close();
-		returnWithError("");
-	}
+$inData = getRequestInfo();
 
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
+$firstName = $inData["firstName"];
+$lastName = $inData["lastName"];
+$phoneNumber = $inData["phoneNum"];
+$emailAddress = $inData["emailAddress"];
+$userId = $inData["userId"];
+$dateCreated = date("Y-m-d H:i:s"); // Current date and time
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
+$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
+if ($conn->connect_error) 
+{
+    returnWithError($conn->connect_error);
+} 
+else
+{
+    $stmt = $conn->prepare("INSERT INTO Contacts (UserId, FirstName, LastName, Phone, Email, DateCreated) VALUES (?,?,?,?,?,?)");
+    if (!$stmt) {
+        returnWithError($conn->error);
+    } else {
+        $stmt->bind_param("isssss", $userId, $firstName, $lastName, $phoneNumber, $emailAddress, $dateCreated);
+        if (!$stmt->execute()) {
+            returnWithError($stmt->error);
+        } else {
+            returnWithError("");
+        }
+        $stmt->close();
+    }
+    $conn->close();
+}
+
+function getRequestInfo()
+{
+    return json_decode(file_get_contents('php://input'), true);
+}
+
+function sendResultInfoAsJson($obj)
+{
+    header('Content-type: application/json');
+    echo $obj;
+}
+
+function returnWithError($err)
+{
+    $retValue = '{"error":"' . $err . '"}';
+    sendResultInfoAsJson($retValue);
+}
 ?>
