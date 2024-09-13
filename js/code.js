@@ -72,15 +72,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     function showAddContactForm() {
         const addContactButton = document.getElementsByClassName('add-contact-icon')[0];
-        const addContactForm = document.getElementById('addContactForm');
+        const addContactContainer = document.getElementById('addContactContainer');
         
-        if(addContactButton && addContactForm) {
+        if(addContactButton && addContactContainer) {
             addContactButton.addEventListener('click', (event) => {
                 event.preventDefault();
-                if(addContactForm.style.display === 'none') {
-					addContactForm.style.display = 'block';
+                if(addContactContainer.style.display === 'none') {
+					addContactContainer.style.display = 'block';
 				} else {
-					addContactForm.style.display = 'none';
+					addContactContainer.style.display = 'none';
 				}
             });
         }
