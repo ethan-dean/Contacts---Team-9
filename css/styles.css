@@ -53,7 +53,7 @@ a {
     padding-top: 10px;
     padding-bottom: 10px; 
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
     border-right: none;
 }
 
@@ -67,8 +67,7 @@ a {
 
 .contacts-table thead tr {
     background: linear-gradient(45deg, 
-	#b8b1ff, 
-	#9646ad, #1a4fa3, #7e48ab, #b4eaf4);
+	#b8b1ff,#9646ad, #1a4fa3, #7e48ab, #b4eaf4);
 	background-size: 200% 200%;
 	animation: glowing-table 5s linear infinite;
 	color: white;
@@ -151,6 +150,8 @@ a {
 }
 
 /* Table styling */
+
+/*
 .contacts-table table {
     width: 100%;
     border-collapse: collapse;
@@ -170,7 +171,7 @@ a {
 
 .contacts-table td {
     font-family: 'Ubuntu', sans-serif;
-}
+}*/
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
