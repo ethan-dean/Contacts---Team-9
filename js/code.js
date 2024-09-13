@@ -332,7 +332,7 @@ function addContact()
 	let phonenumber = document.getElementById("AddContactsPhoneNumber").value;
 	let emailAddress = document.getElementById("AddContactsEmail").value; 
 	
-	if(!validAddContact(firstName, lastName, phoneNum, emailAddress)) {
+	if(!validAddContact(firstName, lastName, phoneNumber, emailAddress)) {
 		return;
 	}
 	
@@ -375,16 +375,16 @@ function addContact()
 	
 }
 
-function validAddContact(firstName, lastName, phoneNum, emailAddress) {
+function validAddContact(firstName, lastName, phoneNumber, emailAddress) {
 	
-	if(firstName == "" || lastName == "" || phoneNum == "" || emailAddress == "") {
+	if(firstName == "" || lastName == "" || phoneNumber == "" || emailAddress == "") {
 		document.getElementById("contactAddResult").innerHTML = "Please fill out all fields";
 		return false;
 	}
 	
 	const phoneRequirements = /^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
 	
-	if(!phoneRequirements.test(phoneNum)) {
+	if(!phoneRequirements.test(phoneNumber)) {
 		document.getElementById("contactAddResult").innerHTML = "Phone number is invalid";
 		return false;
 	}
@@ -417,7 +417,7 @@ function addContactToTable(contact)
 	newRow.innerHTML = `
 	<td>${contact.firstName}</td>
 	<td>${contact.lastName}</td>
-	<td>${contact.phoneNum}</td>
+	<td>${contact.phoneNumber}</td>
 	<td>${contact.emailAddress}</td>
 	<td>
 		<button id="edit-btn" onclick="editContact(this)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAWpJREFUSEvNlo1NxDAMRn2bwCTAJByTAJPAJsAkxybQJ9XVl1z+U6kX6aRr2uT5sx3HJztonA7i2k2CHzu88Wtm/Bh3y/+zmT2Y2c/y/Cnvti1Tiln00QFl4xeBslaNxqCnGJ4CX1arW9glKEDUM67gMRhLv9aP3xfLvyt0fw9AlbpBb2b2uu6hRl4ll4JxTw3sMVUo6u7FYISwbzBfUtwCjpU6D2+hVvNlN8Up96LM4woIsMeYBNw8OKo4F1Pmca3Dk1AmR8A5qLtZE4q4Bkr9o15wDaoxzUJ7Fc9AvaB0xxgohcVHkKFR9sZK/YgGp6TV1X+DUDW4G6xFpUcptmYLUovi3OKW7N0NzNEghs+l4iBh2Q0c3xnFI7OnqxVcg07HmMzUEuhw7Tpyt+eUqytXcvH1ENgTaRbsjUDxHKdulxmwrg2Obq7Zw8pUXEeMIBdoDCg+28j11bmEGgEn26ebbOhH1DWvOUzxP6dTlR/hIXkuAAAAAElFTkSuQmCC"/></button>
@@ -496,7 +496,7 @@ function saveContact(button)
 	const updatedContact = {
 		firstName: cells[0].querySelector("input").value,
 		lastName: cells[1].querySelector("input").value,
-		phoneNum: cells[2].querySelector("input").value,
+		phoneNumber: cells[2].querySelector("input").value,
 		emailAddress: cells[3].querySelector("input").value,
 		userId: userId
 	};
@@ -540,7 +540,7 @@ function deleteContact(button)
 	const contact = {
 		firstName: cells[0].innerText,
 		lastName: cells[1].innerText,
-		phoneNum: cells[2].innerText,
+		phoneNumber: cells[2].innerText,
 		emailAddress: cells[3].innerText,
 		userId: userId
 	}
