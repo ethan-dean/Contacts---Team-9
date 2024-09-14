@@ -541,9 +541,13 @@ function saveContact(row, contactId) {
     
     saveButton.style.display = "none";
     editButton.style.display = "inline-block";
+    
+    const jsonPayload = JSON.stringify(updatedContact);
+    
+    let url = urlBase + '/UpdateContact.' + extension;
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", urlBase + '/UpdateContact.' + extension, true);
+    xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
         xhr.onreadystatechange = function() {
@@ -553,7 +557,7 @@ function saveContact(row, contactId) {
                 loadContacts();
             }
         };
-        xhr.send(JSON.stringify(updatedContact));
+        xhr.send(jsonPayload);
     } catch (error) {
         console.log(error.message);
     }
