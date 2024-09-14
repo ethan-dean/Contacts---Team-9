@@ -455,34 +455,62 @@ function loadContacts()
     {
         search: "",
         userId: userId
-	};
-	
-	let jsonPayload = JSON.stringify(tmp);
-	
-	let url = urlBase + '/SearchContacts.' + extension;
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	
-	try {
-		xhr.onreadystatechange = function() {
-			if(this.readyState == 4 && this.status == 200) {
-				let jsonObject = JSON.parse(xhr.responseText);
-				if(jsonObject.error) {
-					console.log(jsonObject.error);
-					return;
-				}
-				
-				let contactTBody = document.getElementById("contactTableBody");
-				contactTBody.innerHTML = "";
-				
-				displayContacts(jsonObject.results);
-			}
-		}
-		xhr.send(jsonPayload);
-	}catch(error) {
-		console.log(error);
-	}
+    };
+
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/SearchContacts.' + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+                if (jsonObject.error) {
+                    console.log(jsonObject.error);
+                    return;
+                }
+
+                let contactTBody = document.getElementById("contactTableBody");
+                contactTBody.innerHTML = "";
+
+                for (let i = 0; i < jsonObject.results.length; i++) {
+                    let contact = jsonObject.results[i];
+                    let newRow = document.createElement("tr");
+
+                    newRow.innerHTML = `
+                        <td>${contact.FirstName || "N/A"}</td>
+                        <td>${contact.LastName || "N/A"}</td>
+                        <td>${contact.Phone || "N/A"}</td>
+                        <td>${contact.Email || "N/A"}</td>
+                        <td>
+                            <button id="edit-btn-${i}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAWpJREFUSEvNlo1NxDAMRn2bwCTAJByTAJPAJsAkxybQJ9XVl1z+U6kX6aRr2uT5sx3HJztonA7i2k2CHzu88Wtm/Bh3y/+zmT2Y2c/y/Cnvti1Tiln00QFl4xeBslaNxqCnGJ4CX1arW9glKEDUM67gMRhLv9aP3xfLvyt0fw9AlbpBb2b2uu6hRl4ll4JxTw3sMVUo6u7FYISwbzBfUtwCjpU6D2+hVvNlN8Up96LM4woIsMeYBNw8OKo4F1Pmca3Dk1AmR8A5qLtZE4q4Bkr9o15wDaoxzUJ7Fc9AvaB0xxgohcVHkKFR9sZK/YgGp6TV1X+DUDW4G6xFpUcptmYLUovi3OKW7N0NzNEghs+l4iBh2Q0c3xnFI7OnqxVcg07HmMzUEuhw7Tpyt+eUqytXcvH1ENgTaRbsjUDxHKdulxmwrg2Obq7Zw8pUXEeMIBdoDCg+28j11bmEGgEn26ebbOhH1DWvOUzxP6dTlR/hIXkuAAAAAElFTkSuQmCC"/></button>
+                            <button id="save-btn-${i}" style="display: none;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATNJREFUSEvtlu0RgjAMhl8mUTfRTXQSdRJ1Et1EnUR5vYaLvbQEigfe0Tt+QBOefDatMNKqRuJicuAlAD591s2jZHm8BXDyKCdkHgAu9d4h9w8L/CqAimorPAavAVyD9hEAw8aQxxHgj3dBbl/LUU9gfOfKwnPgTQBrY8QjGsR9LhpKGfmmU5WEl4AZES5Gg1HRxrTC+4KtMtBg7sfwlVb6JTiGS+o+fA/Y29PMJx+9dH10Bpd01wxujlNPjhlqq5etFDDHbLNz2CwOdZdjlHBpnSKwVqYnz0S1LULvcts69TpXddJqR+sM5vGX1TNYjdT/zDEHPVuDBSLDXb5ZhW3J6W/ZquZAuJcczhld9nYzRKw7Fy9p4uFQNjBScpqZY1FA3lHoMcy87k7uQu/xpEhmNI/fvVaKH2K3qtIAAAAASUVORK5CYII="/></button>
+                            <button id="delete-btn-${i}"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAPFJREFUSEvtVtEVwiAQSyfRUXQT3cxNdBN1Exuf9VEEEmyf+AGfNHch4bjegEZraMSLGuIDgK046G3EnBwxLvEZwM5JOOIuAPYK6xBT5VUlir6TmAfILoeYSqmYq5TQxT0T/Q0xbWURhWsT7LFw7hn/FI6xLL6k4tCuymuV8Nk1xVY3Iw6PPT0h63lEemVsqbhkcMFcGVtLPHWvsEOl9lYnTiV092YG1Sp2SbrijzrsVqsG0ouLDrkuLHrHzTqX/Pe9AKs3kJ8Su2QpHKeOY+pDqYF8M13GHNnhUA17JOdUogb5nNr3jBUDFPESm4uxzYgf6SOGH0AL/E4AAAAASUVORK5CYII="/></button>
+                        </td>
+                    `;
+
+                    // Add event listeners for the buttons
+                    newRow.querySelector(`#edit-btn-${i}`).onclick = function() {
+                        editContact(newRow, contact);
+                    };
+                    newRow.querySelector(`#save-btn-${i}`).onclick = function() {
+                        saveContact(newRow, contact);
+                    };
+                    newRow.querySelector(`#delete-btn-${i}`).onclick = function() {
+                        deleteContact(contact.ID);
+                    };
+
+                    contactTBody.appendChild(newRow);
+                }
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function editContact(row, contactId)
