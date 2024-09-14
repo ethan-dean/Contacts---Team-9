@@ -497,6 +497,8 @@ function editContact(row, contactId)
 		}
 	});
 	
+	console.log(`Created input for cell ${index}:`, input);
+	
 	row.querySelector("#edit-btn").style.display = "none";
 	row.querySelector("#save-btn").style.display = "inline-block";
 	row.querySelector("#save-btn").addEventListener("click", () => saveContact(row, contactId));
@@ -506,6 +508,10 @@ function saveContact(row, contactId)
 {
 	const cells = row.querySelectorAll("td");
 	
+	cells.forEach((cell, index) => {
+        console.log(`Cell ${index}:`, cell.innerHTML);
+    });
+	
 	const updatedContact = {
 		contactId: contactId,
 		firstName: cells[0].querySelector("input").value,
@@ -514,6 +520,8 @@ function saveContact(row, contactId)
 		emailAddress: cells[3].querySelector("input").value,
 		userId: userId
 	};
+	
+	console.log("Updated Contact:", updatedContact);
 	
 	cells.forEach((cell, index) => {
 		if(index < 4)
@@ -533,6 +541,7 @@ function saveContact(row, contactId)
 		xhr.onreadystatechange = function() {
 			if(this.readyState == 4 && this.status == 200) {
 				console.log("Contact updated!");
+				console.log("Response:", xhr.responseText);
 				loadContacts();
 			}
 		};
