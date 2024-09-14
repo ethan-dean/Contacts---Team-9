@@ -495,41 +495,15 @@ function editContact(row, contactId) {
 function saveContact(row, contactId) {
     const cells = row.querySelectorAll("td");
 
-    // Debugging: Log the cells and their contents
-    cells.forEach((cell, index) => {
-        console.log(`Cell ${index}:`, cell.innerHTML);
-    });
-
-    // Check if inputs exist before accessing their values
-    const firstNameInput = cells[0].querySelector("input");
-    const lastNameInput = cells[1].querySelector("input");
-    const phoneNumberInput = cells[2].querySelector("input");
-    const emailAddressInput = cells[3].querySelector("input");
-
-    if (!firstNameInput || !lastNameInput || !phoneNumberInput || !emailAddressInput) {
-        console.error("One or more input elements are missing.");
+    if (cells.length < 4) {
+        console.error("Expected at least 4 cells in the row");
         return;
     }
 
-    const updatedContact = {
-        contactId: contactId,
-        firstName: firstNameInput.value,
-        lastName: lastNameInput.value,
-        phoneNumber: phoneNumberInput.value,
-        emailAddress: emailAddressInput.value,
-        userId: userId
-    };
-
-    console.log("Updated Contact:", updatedContact);
-
-    cells.forEach((cell, index) => {
-        if (index < 4) {
-            const input = cell.querySelector("input");
-            if (input) {
-                cell.textContent = input.value;
-            }
-        }
-    });
+    const firstNameCell = cells[0];
+    const lastNameCell = cells[1];
+    const phoneCell = cells[2];
+    const emailCell = cells[3];
 
     const editButton = row.querySelector(`#edit-btn-${contactId}`);
     const saveButton = row.querySelector(`#save-btn-${contactId}`);
@@ -538,24 +512,50 @@ function saveContact(row, contactId) {
         console.error("Edit or Save button not found");
         return;
     }
-    
-    saveButton.style.display = "none";
-    editButton.style.display = "inline-block";
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", urlBase + '/UpdateContact.' + extension, true);
+    const newFirstName = firstNameCell.querySelector("input").value;
+    const newLastName = lastNameCell.querySelector("input").value;
+    const newPhone = phoneCell.querySelector("input").value;
+    const newEmail = emailCell.querySelector("input").value;
+    
+    const updatedContact = {
+        ID: contactId,
+        FirstName: newFirstName,
+        LastName: newLastName,
+        Phone: newPhone,
+        Email: newEmail,
+        userId: userId 
+    };
+
+    const jsonPayload = JSON.stringify(updatedContact);
+
+    const url = urlBase + '/UpdateContact.' + extension;
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    try {
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log("Contact updated!");
-                console.log("Response:", xhr.responseText);
-                loadContacts();
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const jsonObject = JSON.parse(xhr.responseText);
+            if (jsonObject.error) {
+                console.error(jsonObject.error);
+                return;
             }
-        };
-        xhr.send(JSON.stringify(updatedContact));
-    } catch (error) {
-        console.log(error.message);
+
+            firstNameCell.innerHTML = `<span>${newFirstName}</span>`;
+            lastNameCell.innerHTML = `<span>${newLastName}</span>`;
+            phoneCell.innerHTML = `<span>${newPhone}</span>`;
+            emailCell.innerHTML = `<span>${newEmail}</span>`;
+
+            saveButton.style.display = "none";
+            editButton.style.display = "inline-block";
+        }
+    };
+
+    try {
+        xhr.send(jsonPayload);
+    } catch (err) {
+        console.error(err.message);
     }
 }
 
