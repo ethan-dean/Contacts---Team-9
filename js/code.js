@@ -361,7 +361,7 @@ function addContact()
 			{
 				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
 				document.getElementById("addContactForm").reset();
-				addContactToTable(tmp);
+				//addContactToTable(tmp);
 				loadContacts();
 				//displayContacts();
 			}
@@ -401,6 +401,14 @@ function validAddContact(firstName, lastName, phoneNumber, emailAddress) {
 
 function displayContacts(contacts)
 {
+	if(!Array.isArray(contacts))
+	{
+		console.error("Contacts is not an array");
+		return;
+	}
+	
+	
+
 	const contactTBody = document.getElementById("contactTableBody");
 	contactTBody.innerHTML = "";
 	
@@ -420,9 +428,9 @@ function addContactToTable(contact)
 	<td>${contact.phoneNumber}</td>
 	<td>${contact.emailAddress}</td>
 	<td>
-		<button id="edit-btn" onclick="editContact(this)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAWpJREFUSEvNlo1NxDAMRn2bwCTAJByTAJPAJsAkxybQJ9XVl1z+U6kX6aRr2uT5sx3HJztonA7i2k2CHzu88Wtm/Bh3y/+zmT2Y2c/y/Cnvti1Tiln00QFl4xeBslaNxqCnGJ4CX1arW9glKEDUM67gMRhLv9aP3xfLvyt0fw9AlbpBb2b2uu6hRl4ll4JxTw3sMVUo6u7FYISwbzBfUtwCjpU6D2+hVvNlN8Up96LM4woIsMeYBNw8OKo4F1Pmca3Dk1AmR8A5qLtZE4q4Bkr9o15wDaoxzUJ7Fc9AvaB0xxgohcVHkKFR9sZK/YgGp6TV1X+DUDW4G6xFpUcptmYLUovi3OKW7N0NzNEghs+l4iBh2Q0c3xnFI7OnqxVcg07HmMzUEuhw7Tpyt+eUqytXcvH1ENgTaRbsjUDxHKdulxmwrg2Obq7Zw8pUXEeMIBdoDCg+28j11bmEGgEn26ebbOhH1DWvOUzxP6dTlR/hIXkuAAAAAElFTkSuQmCC"/></button>
-		<button id="save-btn" onclick="saveContact(this)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATNJREFUSEvtlu0RgjAMhl8mUTfRTXQSdRJ1Et1EnUR5vYaLvbQEigfe0Tt+QBOefDatMNKqRuJicuAlAD591s2jZHm8BXDyKCdkHgAu9d4h9w8L/CqAimorPAavAVyD9hEAw8aQxxHgj3dBbl/LUU9gfOfKwnPgTQBrY8QjGsR9LhpKGfmmU5WEl4AZES5Gg1HRxrTC+4KtMtBg7sfwlVb6JTiGS+o+fA/Y29PMJx+9dH10Bpd01wxujlNPjhlqq5etFDDHbLNz2CwOdZdjlHBpnSKwVqYnz0S1LULvcts69TpXddJqR+sM5vGX1TNYjdT/zDEHPVuDBSLDXb5ZhW3J6W/ZquZAuJcczhld9nYzRKw7Fy9p4uFQNjBScpqZY1FA3lHoMcy87k7uQu/xpEhmNI/fvVaKH2K3qtIAAAAASUVORK5CYII="/></button>
-		<button id="delete-btn" onclick="deleteContact(this)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAPFJREFUSEvtVtEVwiAQSyfRUXQT3cxNdBN1Exuf9VEEEmyf+AGfNHch4bjegEZraMSLGuIDgK046G3EnBwxLvEZwM5JOOIuAPYK6xBT5VUlir6TmAfILoeYSqmYq5TQxT0T/Q0xbWURhWsT7LFw7hn/FI6xLL6k4tCuymuV8Nk1xVY3Iw6PPT0h63lEemVsqbhkcMFcGVtLPHWvsEOl9lYnTiV092YG1Sp2SbrijzrsVqsG0ouLDrkuLHrHzTqX/Pe9AKs3kJ8Su2QpHKeOY+pDqYF8M13GHNnhUA17JOdUogb5nNr3jBUDFPESm4uxzYgf6SOGH0AL/E4AAAAASUVORK5CYII="/></button>
+		<button id="edit-btn" onclick="editContact(newRow, contact.contactId)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAWpJREFUSEvNlo1NxDAMRn2bwCTAJByTAJPAJsAkxybQJ9XVl1z+U6kX6aRr2uT5sx3HJztonA7i2k2CHzu88Wtm/Bh3y/+zmT2Y2c/y/Cnvti1Tiln00QFl4xeBslaNxqCnGJ4CX1arW9glKEDUM67gMRhLv9aP3xfLvyt0fw9AlbpBb2b2uu6hRl4ll4JxTw3sMVUo6u7FYISwbzBfUtwCjpU6D2+hVvNlN8Up96LM4woIsMeYBNw8OKo4F1Pmca3Dk1AmR8A5qLtZE4q4Bkr9o15wDaoxzUJ7Fc9AvaB0xxgohcVHkKFR9sZK/YgGp6TV1X+DUDW4G6xFpUcptmYLUovi3OKW7N0NzNEghs+l4iBh2Q0c3xnFI7OnqxVcg07HmMzUEuhw7Tpyt+eUqytXcvH1ENgTaRbsjUDxHKdulxmwrg2Obq7Zw8pUXEeMIBdoDCg+28j11bmEGgEn26ebbOhH1DWvOUzxP6dTlR/hIXkuAAAAAElFTkSuQmCC"/></button>
+		<button id="save-btn" onclick="saveContact(newRow, contact.contactId)" style: display: none;><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATNJREFUSEvtlu0RgjAMhl8mUTfRTXQSdRJ1Et1EnUR5vYaLvbQEigfe0Tt+QBOefDatMNKqRuJicuAlAD591s2jZHm8BXDyKCdkHgAu9d4h9w8L/CqAimorPAavAVyD9hEAw8aQxxHgj3dBbl/LUU9gfOfKwnPgTQBrY8QjGsR9LhpKGfmmU5WEl4AZES5Gg1HRxrTC+4KtMtBg7sfwlVb6JTiGS+o+fA/Y29PMJx+9dH10Bpd01wxujlNPjhlqq5etFDDHbLNz2CwOdZdjlHBpnSKwVqYnz0S1LULvcts69TpXddJqR+sM5vGX1TNYjdT/zDEHPVuDBSLDXb5ZhW3J6W/ZquZAuJcczhld9nYzRKw7Fy9p4uFQNjBScpqZY1FA3lHoMcy87k7uQu/xpEhmNI/fvVaKH2K3qtIAAAAASUVORK5CYII="/></button>
+		<button id="delete-btn" onclick="deleteContact(contact.contactId)"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAPFJREFUSEvtVtEVwiAQSyfRUXQT3cxNdBN1Exuf9VEEEmyf+AGfNHch4bjegEZraMSLGuIDgK046G3EnBwxLvEZwM5JOOIuAPYK6xBT5VUlir6TmAfILoeYSqmYq5TQxT0T/Q0xbWURhWsT7LFw7hn/FI6xLL6k4tCuymuV8Nk1xVY3Iw6PPT0h63lEemVsqbhkcMFcGVtLPHWvsEOl9lYnTiV092YG1Sp2SbrijzrsVqsG0ouLDrkuLHrHzTqX/Pe9AKs3kJ8Su2QpHKeOY+pDqYF8M13GHNnhUA17JOdUogb5nNr3jBUDFPESm4uxzYgf6SOGH0AL/E4AAAAASUVORK5CYII="/></button>
 	</td>
 	`;
 	contactTBody.appendChild(newRow);
@@ -455,11 +463,7 @@ function loadContacts()
 				let contactTBody = document.getElementById("contactTableBody");
 				contactTBody.innerHTML = "";
 				
-				for(let i = 0; i < jsonObject.results.length; i++)
-				{
-					let contact = jsonObject.results[i];
-					addContactToTable(contact);
-				}
+				displayContacts(jsonObject.results);
 			}
 		}
 		xhr.send(jsonPayload);
@@ -468,32 +472,31 @@ function loadContacts()
 	}
 }
 
-function editContact(button)
+function editContact(row, contactId)
 {
-	
-	const row = button.closest("tr");
 	const cells = row.querySelectorAll("td");
 	
 	cells.forEach((cell, index) => {
 		if(index < 4) {
 			const input = document.createElement("input");
 			input.type = "text";
-			input.value = cell.innerText;
-			cell.innerHTML = "";
+			input.value = cell.textContent;
+			cell.textContent = "";
 			cell.appendChild(input);
 		}
 	});
 	
 	button.style.display = none;
 	row.querySelector("#save-btn").style.display = "inline-block";
+	row.querySelector("#save-btn").addEventListener("click", () => saveContact(row, contactId));
 }
 
-function saveContact(button)
+function saveContact(row, contactId)
 {
-	const row = button.closest("tr");
 	const cells = row.querySelectorAll("td");
 	
 	const updatedContact = {
+		contactId: contactId,
 		firstName: cells[0].querySelector("input").value,
 		lastName: cells[1].querySelector("input").value,
 		phoneNumber: cells[2].querySelector("input").value,
@@ -528,22 +531,18 @@ function saveContact(button)
 	}
 }
 
-function deleteContact(button)
+function deleteContact(contactId)
 {
 	if(!confirm("Are you sure you want to delete this contact?")) {
 		return;
 	}
 	
-	const row = button.closest("tr");
-	const cells = row.querySelectorAll("td");
-	
 	const contact = {
-		firstName: cells[0].innerText,
-		lastName: cells[1].innerText,
-		phoneNumber: cells[2].innerText,
-		emailAddress: cells[3].innerText,
+		contactId: contactId,
 		userId: userId
 	}
+	
+	let jsonPayload = JSON.stringify(contact);
 	
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", urlBase + '/DeleteContact.' + extension, true);
@@ -552,13 +551,12 @@ function deleteContact(button)
 		xhr.onreadystatechange = function() {
 			if(this.readyState == 4 && this.status == 200) {
 				console.log("Contact deleted!");
-				row.remove();
 				loadContacts();
 			}
 		};
-	xhr.send(JSON.stringify(contact));
+	xhr.send(jsonPayload);
 	}catch(error) {
-	console.log(error.message);
+	console.error(error.message);
 	}
 }
 
