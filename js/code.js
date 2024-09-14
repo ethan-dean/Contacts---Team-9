@@ -497,7 +497,7 @@ function editContact(row, contactId)
 		}
 	});
 	
-	button.style.display = none;
+	row.querySelector("#edit-btn").style.display = none;
 	row.querySelector("#save-btn").style.display = "inline-block";
 	row.querySelector("#save-btn").addEventListener("click", () => saveContact(row, contactId));
 }
