@@ -4,9 +4,9 @@
 	$inData = getRequestInfo();
 	
 	$ID = $inData["ID"];
-	$firstName = $inData["firstName"];
-	$lastName = $inData["lastName"];
-	$phoneNumber = $inData["phoneNum"];
+	$newFirstName = $inData["newFirstName"];
+	$newLastName = $inData["newLastName"];
+	$phoneNumber = $inData["phoneNumber"];
 	$emailAddress = $inData["emailAddress"];
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");

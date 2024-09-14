@@ -497,11 +497,11 @@ function saveContact(contactId) {
 
     let tmp = {
         ID: contactId,
-        FirstName: firstNameVal,
-        LastName: lastNameVal,
-        Phone: phoneVal,
-        Email: emailVal,
-        userId: userId
+        newFirstName: firstNameVal,
+        newLastName: lastNameVal,
+        phoneNumber: phoneVal,
+        emailAddress: emailVal
+        //userId: userId
     };
 
     let jsonPayload = JSON.stringify(tmp);
