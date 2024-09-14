@@ -18,10 +18,16 @@
 	{
 		$stmt = $conn->prepare("UPDATE Contacts SET FirstName=?,LastName=?,Phone=?,Email=? WHERE ID=?");
 		$stmt->bind_param("sssss", $newFirstName, $newLastName, $phoneNumber, $emailAddress, $ID);
-		$stmt->execute();
+		
+		if($stmt->execute())
+		{
+			returnWithError("");
+		}else {
+			returnWithError($stmt->error);
+		}
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
+		//returnWithError("");
 	}
 
 	function getRequestInfo()

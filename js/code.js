@@ -516,11 +516,14 @@ function saveContact(contactId) {
             if (this.readyState == 4 && this.status == 200) {
                 const jsonObject = JSON.parse(xhr.responseText);
                 if (jsonObject.error) {
-                    console.error(jsonObject.error);
+                    console.error("Server error:", jsonObject.error);
                     return;
                 }
                 console.log("Contact has been updated");
                 loadContacts();
+            } else if (this.readyState == 4) {
+                console.error("Failed to update contact. Status:", this.status);
+                console.error("Response:", this.responseText);
             }
         };
         xhr.send(jsonPayload);
