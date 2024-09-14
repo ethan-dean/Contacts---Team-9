@@ -494,10 +494,11 @@ function editContact(row, contactId)
 			input.value = cell.textContent;
 			cell.textContent = "";
 			cell.appendChild(input);
+			
+			console.log(`Created input for cell ${index}:`, input);
 		}
 	});
 	
-	console.log(`Created input for cell ${index}:`, input);
 	
 	row.querySelector("#edit-btn").style.display = "none";
 	row.querySelector("#save-btn").style.display = "inline-block";
