@@ -442,10 +442,10 @@ function loadContacts() {
 
                     // Add event listeners for the buttons
                     newRow.querySelector(`#edit-btn-${i}`).onclick = function() {
-                        editContact(newRow, contact);
+                        editContact(newRow, contact.ID);
                     };
                     newRow.querySelector(`#save-btn-${i}`).onclick = function() {
-                        saveContact(newRow, contact);
+                        saveContact(newRow, contact.ID);
                     };
                     newRow.querySelector(`#delete-btn-${i}`).onclick = function() {
                         deleteContact(contact.ID);
