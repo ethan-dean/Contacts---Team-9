@@ -441,7 +441,7 @@ function addContactToTable(contact) {
         saveContact(newRow, contact);
     };
     newRow.querySelector("#delete-btn").onclick = function() {
-        deleteContact(contact.contactId);
+        deleteContact(contact.contactId, newRow);
     };
 
     contactTBody.appendChild(newRow);
@@ -497,7 +497,7 @@ function editContact(row, contactId)
 		}
 	});
 	
-	row.querySelector("#edit-btn").style.display = none;
+	row.querySelector("#edit-btn").style.display = "none";
 	row.querySelector("#save-btn").style.display = "inline-block";
 	row.querySelector("#save-btn").addEventListener("click", () => saveContact(row, contactId));
 }
@@ -523,7 +523,7 @@ function saveContact(row, contactId)
 		}
 	});
 	
-	button.style.display = "none";
+	row.querySelector("#save-btn").style.display = "none";
 	row.querySelector("#edit-btn").style.display = "inline-block";
 	
 	let xhr = new XMLHttpRequest();
@@ -542,7 +542,7 @@ function saveContact(row, contactId)
 	}
 }
 
-function deleteContact(contactId)
+function deleteContact(contactId, row)
 {
 	if(!confirm("Are you sure you want to delete this contact?")) {
 		return;
@@ -562,6 +562,7 @@ function deleteContact(contactId)
 		xhr.onreadystatechange = function() {
 			if(this.readyState == 4 && this.status == 200) {
 				console.log("Contact deleted!");
+				row.remove();
 				loadContacts();
 			}
 		};
