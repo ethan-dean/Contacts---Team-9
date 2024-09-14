@@ -17,7 +17,7 @@
 	else
 	{
 		$stmt = $conn->prepare("UPDATE Contacts SET FirstName=?,LastName=?,Phone=?,Email=? WHERE ID=?");
-		$stmt->bind_param("sssss", $firstName, $lastName, $phoneNumber, $emailAddress, $ID);
+		$stmt->bind_param("sssss", $newFirstName, $newLastName, $phoneNumber, $emailAddress, $ID);
 		$stmt->execute();
 		$stmt->close();
 		$conn->close();
