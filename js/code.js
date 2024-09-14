@@ -505,51 +505,63 @@ function editContact(row, contactId)
 	row.querySelector("#save-btn").addEventListener("click", () => saveContact(row, contactId));
 }
 
-function saveContact(row, contactId)
-{
-	const cells = row.querySelectorAll("td");
-	
-	cells.forEach((cell, index) => {
+function saveContact(row, contactId) {
+    const cells = row.querySelectorAll("td");
+
+    // Debugging: Log the cells and their contents
+    cells.forEach((cell, index) => {
         console.log(`Cell ${index}:`, cell.innerHTML);
     });
-	
-	const updatedContact = {
-		contactId: contactId,
-		firstName: cells[0].querySelector("input").value,
-		lastName: cells[1].querySelector("input").value,
-		phoneNumber: cells[2].querySelector("input").value,
-		emailAddress: cells[3].querySelector("input").value,
-		userId: userId
-	};
-	
-	console.log("Updated Contact:", updatedContact);
-	
-	cells.forEach((cell, index) => {
-		if(index < 4)
-		{
-			const input = cell.querySelector("input");
-			cell.textContent = input.value;
-		}
-	});
-	
-	row.querySelector("#save-btn").style.display = "none";
-	row.querySelector("#edit-btn").style.display = "inline-block";
-	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", urlBase + '/UpdateContact.' + extension, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
-		xhr.onreadystatechange = function() {
-			if(this.readyState == 4 && this.status == 200) {
-				console.log("Contact updated!");
-				console.log("Response:", xhr.responseText);
-				loadContacts();
-			}
-		};
-	xhr.send(JSON.stringify(updatedContact));	
-	} catch(error) {
-		console.log(error.message);
-	}
+
+    // Check if inputs exist before accessing their values
+    const firstNameInput = cells[0].querySelector("input");
+    const lastNameInput = cells[1].querySelector("input");
+    const phoneNumberInput = cells[2].querySelector("input");
+    const emailAddressInput = cells[3].querySelector("input");
+
+    if (!firstNameInput || !lastNameInput || !phoneNumberInput || !emailAddressInput) {
+        console.error("One or more input elements are missing.");
+        return;
+    }
+
+    const updatedContact = {
+        contactId: contactId,
+        firstName: firstNameInput.value,
+        lastName: lastNameInput.value,
+        phoneNumber: phoneNumberInput.value,
+        emailAddress: emailAddressInput.value,
+        userId: userId
+    };
+
+    console.log("Updated Contact:", updatedContact);
+
+    cells.forEach((cell, index) => {
+        if (index < 4) {
+            const input = cell.querySelector("input");
+            if (input) {
+                cell.textContent = input.value;
+            }
+        }
+    });
+
+    row.querySelector("#save-btn").style.display = "none";
+    row.querySelector("#edit-btn").style.display = "inline-block";
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", urlBase + '/UpdateContact.' + extension, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Contact updated!");
+                console.log("Response:", xhr.responseText);
+                loadContacts();
+            }
+        };
+        xhr.send(JSON.stringify(updatedContact));
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 function deleteContact(contactId, row)
