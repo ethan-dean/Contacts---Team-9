@@ -585,5 +585,5 @@ function searchContact()
 }
 
 function navigateToAbout() {
-    window.location.href = "html/about.html";
+    window.location.href = "about.html";
 }
