@@ -583,3 +583,7 @@ function searchContact()
 		}
 	}
 }
+
+function navigateToAbout() {
+    window.location.href = "html/about.html";
+}
