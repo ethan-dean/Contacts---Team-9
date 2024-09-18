@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>About Us</title>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css"> <!-- link to your CSS file -->
+  <script type="text/javascript" src="js/code.js"></script>
+  <link rel="stylesheet" href="css/styles.css?v=1.0">  
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="icon" href="images/book32.png">
 </head>
 <body>
+
+  <span id="welcome-message"></span>
+
   <header>
     <nav class="header_nav">
       <div class="header_logo">
@@ -25,32 +32,49 @@
         <li>
           <a href="#logout" onclick="doLogout();">Log Out</a>
         </li>
+        <li class="header_search">
+          <form action="" class="search-form">
+            <input type="text" placeholder="Search..." onkeyup="searchContact();" id="search-input">
+            <a href="#" class="search-btn" type="button" onclick="searchContact();">
+              <img class="search-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZNJREFUSEvtlu1NQzEMRd1JgEmASYBJgEmASYBJgEmAI8Xoyi+xE1VP/UOkqh9JfWxf23kHO9E6nIhrK+BzM/PXp5m9HeN0BQZ0a2b3AwgOvPzuPaw6kYGvzOx10uCyAyMwEWiUz2b21dILhIVjly0j7t/jbPQ9sEYK5K7Q06VAFtb1jP498EcrIozoflZc7CEL7zh7UUkUwU+SOvWcqNjTFXXVM0hDpoYrgj1aWgWwr6i5GgQAiEXUSFVGHcHfzYAaUzifgWCc4oupVQdJtxfiJnIFa6rSPzUret5l0cJMi0zB6m01WGD7cOEz0vDiN+Ripa2lgGlvk5pRGz25/v4a22XK2wQ8LddsVVdt6fte1XxP5cr6OE1VxxNN83IfxwlEZQ5bQuBaVGW0owNxVlfXXrzFymgzz3q303uL3tuGQjoLtxM2p67I6j5mPvutkxWYP5HgzBS8GhQ+JG4SB3RQaDulkVdgjVKvRY+q99w1BV8Bz/Yy50r4XuAI38ztPcEO57ls81CwN3gozz94pXKPOvsDp3hrHxxphrAAAAAASUVORK5CYII=" alt="search-icon"/>
+            </a>
+          </form>
+        </li>
+        <li class="add-contact">
+        
+        </li>
       </ul>
     </nav>
   </header>
 
-  <h1>About Us</h1>
-  <p>Welcome to our Contact Manager website! This platform is designed to help you manage your contacts efficiently and effectively.</p>
-  <h2>Our Team</h2>
-  <ul>
-    <li>
-      <strong>Beatriz Altimeyer Menezes</strong> - Frontend Developer
-    </li>
-    <li>
-      <strong>Ethan Dean</strong> - Database Developer
-    </li>
-    <li>
-      <strong>Reed Holton</strong> - API Developer
-    </li>
-    <li>
-      <strong>SeNiah McField</strong> - Frontend Developer
-    </li>
-    <li>
-      <strong>Marco Plasencia</strong> - API Developer
-    </li>
-    <li>
-      <strong>Wesley Underwood</strong> - Project Manager
-    </li>
-  </ul>
+
+  <div class="about-content">
+    <h1>About Us</h1>
+    <p>Welcome to our Contact Manager website! This platform is designed to help you manage your contacts efficiently and effectively.</p>
+    <h2>Our Team</h2>
+    <ul>
+      <li>
+        <strong>Beatriz Altimeyer Menezes</strong> - Frontend Developer
+      </li>
+      <li>
+        <strong>Ethan Dean</strong> - Database Developer
+      </li>
+      <li>
+        <strong>Reed Holton</strong> - API Developer
+      </li>
+      <li>
+        <strong>SeNiah McField</strong> - Frontend Developer
+      </li>
+      <li>
+        <strong>Marco Plasencia</strong> - API Developer
+      </li>
+      <li>
+        <strong>Wesley Underwood</strong> - Project Manager
+      </li>
+    </ul>
+  </div>
+
+  <!-- Remove the contacts table, as it's not relevant to the About page -->
+  <!-- <div class="contacts-table"> ... </div> -->
 </body>
 </html>
