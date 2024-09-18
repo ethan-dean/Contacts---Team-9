@@ -198,6 +198,7 @@ a {
 }
 */
 .btn {
+    margin-top: 20px;
 	border: none;
 	outline: none;
     color: black;
