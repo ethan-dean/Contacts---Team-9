@@ -214,7 +214,6 @@ function doRegister()
 		if(this.status == 200)
 		{
 			let jsonObject = JSON.parse( xhr.responseText );
-			userId = jsonObject.id;
 			if( userId < 1 )
 			{
 				document.getElementById("registerResult").innerHTML = "User/Password combination incorrect";
@@ -226,6 +225,7 @@ function doRegister()
 			userId = jsonObject.id;
 			saveCookie();
 	
+			console.log("redirecting to contact page...");
 			window.location.href = "contact.html";
 		}else{
 				document.getElementById("registerResult").innerHTML = "User already exists";
