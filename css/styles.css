@@ -302,10 +302,11 @@ a {
     font-size: 14px;
     margin-bottom: 20px;
   }
-  .about-us-btn {
-    color: #000;
+  .header_menu a {
+    color: #000; 
+    text-decoration: none;
   }
   
-  .about-us-btn:hover {
-    color: #000;
+  .header_menu a:hover {
+    color: #000; 
   }
