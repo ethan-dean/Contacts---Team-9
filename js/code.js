@@ -220,9 +220,11 @@ function doRegister()
 				return;
 			}
 			document.getElementById("registerResult").innerHTML = "User has been registered";
+			console.log("setting global variables...");
 			firstName = docFirstName;
 			lastName = docLastName;
 			userId = jsonObject.id;
+			console.log("saving cookie...");
 			saveCookie();
 	
 			console.log("redirecting to contact page...");
