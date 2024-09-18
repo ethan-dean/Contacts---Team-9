@@ -302,3 +302,10 @@ a {
     font-size: 14px;
     margin-bottom: 20px;
   }
+  .about-us-btn {
+    color: #000;
+  }
+  
+  .about-us-btn:hover {
+    color: #000;
+  }
