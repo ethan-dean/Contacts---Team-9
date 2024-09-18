@@ -308,7 +308,6 @@ a {
     text-decoration: none;
     font-size: 16px;  /* Ensure consistent font size */
     text-transform: uppercase;  /* Capitalizes all links for consistency */
-    font-weight: bold;  /* Ensure bold text if needed */
 }
 
 .header_menu a:hover {
