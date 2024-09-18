@@ -177,22 +177,22 @@ function validLoginForm(login, password)
 
 function doRegister()
 {
-	let firstName = document.getElementById("registerFirstName").value;
-	let lastName = document.getElementById("registerLastName").value;
-	let username = document.getElementById("registerUser").value;
-	let password = document.getElementById("registerPassword").value;
+	let docFirstName = document.getElementById("registerFirstName").value;
+	let docLastName = document.getElementById("registerLastName").value;
+	let docUsername = document.getElementById("registerUser").value;
+	let docPassword = document.getElementById("registerPassword").value;
 	
-	if(!validRegisterForm(firstName, lastName, username, password)) {
+	if(!validRegisterForm(docFirstName, docLastName, docUsername, docPassword)) {
 		return;
 	}
 	
 	document.getElementById("registerResult").innerHTML = "";
 	
 	let tmp = {
-		firstName:firstName,
-		lastName:lastName,
-		login:username,
-		password:password
+		firstName:docFirstName,
+		lastName:docLastName,
+		login:docUsername,
+		password:docPassword
 	}
 	
 	let jsonPayload = JSON.stringify( tmp );
@@ -221,9 +221,12 @@ function doRegister()
 				return;
 			}
 			document.getElementById("registerResult").innerHTML = "User has been registered";
-			firstName = jsonObject.firstName;
-			lastName = jsonObject.lastName;
+			firstName = docFirstName;
+			lastName = docLastName;
+			userId = jsonObject.id;
 			saveCookie();
+	
+			window.location.href = "contact.html";
 		}else{
 				document.getElementById("registerResult").innerHTML = "User already exists";
 				return;
