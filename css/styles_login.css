@@ -88,6 +88,19 @@ body {
 	color: green;
 }
 
+.requirement-item {
+	display: flex;
+	align-items: center;
+	margin: 5px 0;
+}
+
+.requirement-item img {
+	width: 24px;
+	height: 24px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
 .input-box img {
 	position: absolute;
 	right: 10px;

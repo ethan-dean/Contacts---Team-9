@@ -31,44 +31,66 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     function validatePassword()
     {
-        const passwordInput = document.getElementById("registerPassword");
-        const requirements = document.getElementsByClassName('password-requirements')[0];
-        const length = document.getElementById('password_length');
-        const uppercase = document.getElementById('password_uppercase');
-        const lowercase = document.getElementById('password_lowercase');
-        const number = document.getElementById('password_number');
-        const special = document.getElementById('password_special');
-        
-        if (!passwordInput || !requirements || !length || !uppercase || !lowercase || !number || !special) {
-            //console.error("One or more elements for password validation are missing.");
-            return;
+			const passwordInput = document.getElementById('registerPassword'); // Assuming the password input has an ID of 'registerPassword'
+			const passwordRequirements = document.getElementsByClassName('password-requirements')[0];
+			
+			passwordInput.addEventListener('focus', () => {
+				passwordRequirements.style.display = 'block';
+			});
+	
+			passwordInput.addEventListener('blur', () => {
+				passwordRequirements.style.display = 'none';
+			});
+			
+			const requirements = {
+				length: {
+					element: document.getElementById('password_length'),
+					xIcon: document.getElementById('length_icon_x'),
+					checkIcon: document.getElementById('length_icon_check'),
+					isValid: value => value.length >= 8
+				},
+				uppercase: {
+					element: document.getElementById('password_uppercase'),
+					xIcon: document.getElementById('uppercase_icon_x'),
+					checkIcon: document.getElementById('uppercase_icon_check'),
+					isValid: value => /[A-Z]/.test(value)
+				},
+				lowercase: {
+					element: document.getElementById('password_lowercase'),
+					xIcon: document.getElementById('lowercase_icon_x'),
+					checkIcon: document.getElementById('lowercase_icon_check'),
+					isValid: value => /[a-z]/.test(value)
+				},
+				number: {
+					element: document.getElementById('password_number'),
+					xIcon: document.getElementById('number_icon_x'),
+					checkIcon: document.getElementById('number_icon_check'),
+					isValid: value => /\d/.test(value)
+				},
+				special: {
+					element: document.getElementById('password_special'),
+					xIcon: document.getElementById('special_icon_x'),
+					checkIcon: document.getElementById('special_icon_check'),
+					isValid: value => /[@#$%^&+=!_\-]/.test(value)
+				}
+			};
+		
+			passwordInput.addEventListener('input', function() {
+				const value = passwordInput.value;
+		
+				for (const key in requirements) {
+					const requirement = requirements[key];
+					const isValid = requirement.isValid(value);
+					if (requirement.element.classList.toggle('valid', isValid)) {
+						requirement.xIcon.style.display = 'none';
+						requirement.checkIcon.style.display = 'inline-block';
+					} else {
+						requirement.xIcon.style.display = 'inline-block';
+						requirement.checkIcon.style.display = 'none';
+					}
+				}
+			});
         }
-
-        passwordInput.addEventListener('focus', () => {
-            requirements.style.display = 'block';
-        });
-
-        passwordInput.addEventListener('blur', () => {
-            requirements.style.display = 'none';
-        });
-
-        passwordInput.addEventListener('input', () => {
-            const value = passwordInput.value;
-            length.classList.toggle('valid', value.length >= 8);
-            length.classList.toggle('invalid', value.length < 8);
-
-            uppercase.classList.toggle('valid', /[A-Z]/.test(value));
-            uppercase.classList.toggle('invalid', !/[A-Z]/.test(value));
-			lowercase.classList.toggle('valid', /[a-z]/.test(value));
-            lowercase.classList.toggle('invalid', !/[a-z]/.test(value));
-
-            number.classList.toggle('valid', /\d/.test(value));
-            number.classList.toggle('invalid', !/\d/.test(value));
-
-            special.classList.toggle('valid', /[@#$%^&+=!_\-]/.test(value));
-            special.classList.toggle('invalid', !/[@#$%^&+=!_\-]/.test(value));
-        });
-    }
     
     function showAddContactForm() {
         const addContactButton = document.getElementsByClassName('add-contact-icon')[0];
@@ -379,6 +401,13 @@ function validAddContact(firstName, lastName, phoneNumber, emailAddress) {
 	
 	if(firstName == "" || lastName == "" || phoneNumber == "" || emailAddress == "") {
 		document.getElementById("contactAddResult").innerHTML = "Please fill out all fields";
+		return false;
+	}
+	
+	let maxLength = 50;
+	
+	if(firstName.length > maxLength || lastName.length > maxLength || phoneNumber.length > maxLength || emailAddress.length > maxLength) {
+		document.getElementById("contactAddResult").innerHTML = "Fields cannot exceed 50 characters";
 		return false;
 	}
 	
