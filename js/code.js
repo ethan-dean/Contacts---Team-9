@@ -108,8 +108,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 	}
 
-    toggleForm();
-    validatePassword();
+    const currentPage = window.location.pathname;
+    if(currentPage === 'contactfold.com/login.html') {
+		toggleForm();
+		validatePassword();
+	}
     showAddContactForm();
 });
 
