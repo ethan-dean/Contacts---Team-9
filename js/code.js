@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const currentPage = window.location.pathname;
     console.log(currentPage);
-    if(currentPage === '/login.html' && currentPage === '/login.html#register') {
+    if(currentPage === '/login.html' || currentPage === '/login.html#register') {
 		toggleForm();
 		validatePassword();
 	}
