@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	}
 
     const currentPage = window.location.pathname;
-    if(currentPage === 'contactfold.com/login.html') {
+    if(currentPage === 'contactfold.com/login.html' && currentPage === 'contactfold.com/login.html#register') {
 		toggleForm();
 		validatePassword();
 	}
