@@ -240,7 +240,7 @@ function doRegister()
 		if(this.status == 200)
 		{
 			let jsonObject = JSON.parse( xhr.responseText );
-			if( userId < 1 )
+			if( jsonObject.userId < 1 )
 			{
 				document.getElementById("registerResult").innerHTML = "User/Password combination incorrect";
 				return;
