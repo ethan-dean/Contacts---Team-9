@@ -365,6 +365,10 @@ function addContact()
 	
 	phoneNumber = formatPhoneNumber(phoneNumber);
 	
+	console.log("Original Phone Number:", phoneNumber);
+phoneNumber = formatPhoneNumber(phoneNumber);
+console.log("Formatted Phone Number:", phoneNumber);
+	
 	if(!validAddContact(firstName, lastName, phoneNumber, emailAddress)) {
 		return;
 	}
@@ -605,7 +609,7 @@ function saveContact(contactId) {
     }
 }
 
-function deleteContact(contactId, row)
+function deleteContact(contactId)
 {
 	if(!confirm("Are you sure you want to delete this contact?")) {
 		return;

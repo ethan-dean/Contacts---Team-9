@@ -39,8 +39,7 @@ a {
 
 .contacts-table {
     width: 1200px; 
-    margin: 20px auto; 
-    border-radius: 10px; 
+    margin: 20px auto;  
     overflow: hidden; 
 }
 
@@ -54,8 +53,6 @@ a {
     padding-top: 10px;
     padding-bottom: 10px; 
     text-align: center;
-    color: rgb(0, 0, 0);
-    border-right: none;
 }
 
 .contacts-table thead {
@@ -63,7 +60,8 @@ a {
 	#b8b1ff,#9646ad, #1a4fa3, #7e48ab, #b4eaf4);
 	background-size: 200% 200%;
 	animation: glowing-table 5s linear infinite;
-	color: rgb(0, 0, 0);
+	color: rgb(255 255 255);
+	border: 3px solid #000 
 }
 
 @keyframes glowing-table {
@@ -76,8 +74,8 @@ a {
 }
 
 .contacts-table tbody tr {
-    border-bottom: 2px solid #000000;
-    color: #FFF;
+    border: 3px solid #000000;
+    color: #000000;
 }
 
 /* Styling for the form container */
