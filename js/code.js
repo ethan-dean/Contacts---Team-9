@@ -392,9 +392,8 @@ function addContact()
 			{
 				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
 				document.getElementById("addContactForm").reset();
-				//addContactToTable(tmp);
 				loadContacts();
-				//displayContacts();
+				
 			}
 		};
 		xhr.send(jsonPayload);
@@ -427,6 +426,8 @@ function validAddContact(firstName, lastName, phoneNumber, emailAddress) {
 		return false;
 	}
 	
+	phoneNumber = formatPhoneNumber(phoneNumber);
+	
 	const emailRequirements = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 	
 	if(!emailRequirements.test(emailAddress)) {
@@ -435,6 +436,15 @@ function validAddContact(firstName, lastName, phoneNumber, emailAddress) {
 	}
 	
 	return true;
+}
+
+function formatPhoneNumber(phoneNumber) {
+    const remove = ('' + phoneNumber).replace(/\D/g, '');
+    const match = remove.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+        return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return phoneNumber;
 }
 
 function loadContacts() {
@@ -512,6 +522,7 @@ function editContact(contactId) {
     var lastNameData = lastNameCell.innerText;
     var emailData = emailCell.innerText;
     var phoneData = phoneCell.innerText;
+    phoneData = formatPhoneNumber(phoneData);
 
     firstNameCell.innerHTML = "<input type='text' id='firstName_text" + contactId + "' value='" + firstNameData + "'>";
     lastNameCell.innerHTML = "<input type='text' id='lastName_text" + contactId + "' value='" + lastNameData + "'>";
@@ -539,7 +550,6 @@ function saveContact(contactId) {
         newLastName: lastNameVal,
         phoneNumber: phoneVal,
         emailAddress: emailVal
-        //userId: userId
     };
 
     let jsonPayload = JSON.stringify(tmp);

@@ -17,8 +17,8 @@
 
 body 
 {
-    background-image: url('images/backgroundyy.png'); 
-    background-size: cover; 
+    background-image: url('../images/crystal_background.jpg'); 
+    background-size: contain;
     margin: 0 auto;
     font-family: var(--Poppins);
     height: 100vh;
@@ -54,16 +54,8 @@ a {
     padding-top: 10px;
     padding-bottom: 10px; 
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-right: none;
-}
-
-.contacts-table th:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-.contacts-table th:last-child {
-    border-bottom-right-radius: 10px;
 }
 
 .contacts-table thead tr {
@@ -84,7 +76,7 @@ a {
 }
 
 .contacts-table tbody tr {
-    border: 5px solid #000000;
+    border: 3px solid #000000;
 }
 
 /* Styling for the form container */
@@ -97,6 +89,20 @@ a {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.form-container .btn {
+	width: 100%;
+	height: 45px;
+	background: #fff;
+	border: none;
+	outline: none;
+	border-radius: 12px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+	cursor: pointer;
+	font-size: 16px;
+	color: #333;
+	font-weight: 600;
+}
+
 /* Input field styling */
 .input-box input {
     width: 100%;
@@ -104,7 +110,6 @@ a {
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Button styling */
@@ -118,7 +123,6 @@ a {
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Button hover effect */
@@ -136,7 +140,6 @@ a {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Add hover effect to search button */
@@ -151,29 +154,6 @@ a {
     background-color: #ffffff;
 }
 
-/* Table styling */
-
-/*
-.contacts-table table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.contacts-table th, .contacts-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.contacts-table th {
-    background-color: #f2f2f2;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.contacts-table td {
-    font-family: 'Ubuntu', sans-serif;
-}*/
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
@@ -182,26 +162,10 @@ a {
     }
 }
 
-/*
 .btn {
 	border: none;
 	outline: none;
-	color: rgb(144, 16, 16);
-	cursor: pointer;
-	position: relative;
-	z-index: 0;
-	border-radius: 12px;
-	width: 270px;
-	height: 40px;
-	font-family: var(--plus-jakarta-sans);
-	font-weight: 800;
-	font-size: 18px;
-}
-*/
-.btn {
-	border: none;
-	outline: none;
-    color: black;
+    color: rgb(255, 255, 255);
 	cursor: pointer;
 	position: relative;
 	z-index: 0;
@@ -272,30 +236,30 @@ a {
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: var(--Poppins);
-  }
-  
-  #about-us ul {
+}
+
+#about-us ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  
-  #about-us li {
+}
+
+#about-us li {
     margin: 20px;
     width: calc(33.33% - 20px);
-  }
-  
-  #about-us img {
+}
+
+#about-us img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     margin: 10px;
-  }
-  
-  #about-us h3 {
+}
+
+#about-us h3 {
     font-size: 18px;
     margin-bottom: 10px;
   }
