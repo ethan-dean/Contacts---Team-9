@@ -557,10 +557,6 @@ function saveContact(contactId) {
     var phoneVal = document.getElementById("phone_text" + contactId).value;
     phoneVal = formatPhoneNumber(phoneVal);
     
-    if(!validEmail(emailVal, contactId))
-    {
-        return;
-    }
 
     document.getElementById("first_Name" + contactId).innerHTML = firstNameVal;
     document.getElementById("last_Name" + contactId).innerHTML = lastNameVal;
