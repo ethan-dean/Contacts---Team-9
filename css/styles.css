@@ -43,7 +43,7 @@ a {
 .contacts-table {
     width: 1200px; 
     margin: 20px auto;  
-    max-height: 80vh;
+    max-height: 48vh;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #888 #f1f1f1;
