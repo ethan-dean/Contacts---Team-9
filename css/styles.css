@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900;&display=swap');
 
 @import url('sections/header_contact.css');
 
@@ -23,6 +23,7 @@ body
     background-attachment: fixed;
     margin: 0 auto;
     font-family: var(--Poppins);
+    font-weight: bold;
     min-height: 100vh;
     
 }
@@ -33,6 +34,7 @@ a {
 
 #welcome-message {
     color: black;
+    font-weight: bold;
     font-size: 35px;
     padding-top: 25px;
     display: flex;
@@ -151,6 +153,7 @@ a {
 .search-input {
     padding: 10px;
     border: 1px solid #ccc;
+    font-weight: normal;
     border-radius: 5px;
 }
 
